@@ -165,10 +165,10 @@ public final class Cubies {
         return -1;
     }
 
-    private int getIndex(int[] pos, int element) {
+    private int getIndex(int[] cubie, int element) {
         int i;
         for(i=0; i < 48; i++) {
-            if(element == pos[i]) {
+            if(element == cubie[i]) {
                 return i;
             }
         }
