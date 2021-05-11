@@ -177,7 +177,86 @@ public final class Cubies {
 
     List<Integer>  crossSequence = new ArrayList<Integer>();
 
+    public List<Integer> parseSequence(String sequence) {
+        String[] values = sequence.trim().split(" ");
+        List<Integer> movs = new ArrayList<Integer>();
+        for (String value : values) {
+            if (value.equals("U")){
+                movs.add(Movements.U_CW);
+            } else if (value.equals("U'")){
+                movs.add(Movements.U_CCW);
+            } else if (value.equals("F")){
+                movs.add(Movements.F_CW);
+            } else if (value.equals("F'")){
+                movs.add(Movements.F_CCW);
+            } else if (value.equals("R")){
+                movs.add(Movements.R_CW);
+            } else if (value.equals("R'")){
+                movs.add(Movements.R_CCW);
+            } else if (value.equals("B")){
+                movs.add(Movements.B_CW);
+            } else if (value.equals("B'")){
+                movs.add(Movements.B_CCW);
+            } else if (value.equals("D")){
+                movs.add(Movements.D_CW);
+            } else if (value.equals("D'")){
+                movs.add(Movements.D_CCW);
+            } else if (value.equals("L")){
+                movs.add(Movements.L_CW);
+            } else if (value.equals("L'")){
+                movs.add(Movements.L_CCW);
+            } else {
+                throw  new MovementNotFoundException("Wrong sequence, please check.");
+            }
+        }
+        return (movs);
+    }
+
+    public void runSequence(List<Integer> movements){
+        for(int move : movements){
+            switch (move){
+                case Movements.U_CW :
+                    turnCW(Faces.UP);
+                    break;
+                case Movements.U_CCW :
+                    turnCCW(Faces.UP);
+                    break;
+                case Movements.F_CW :
+                    turnCW(Faces.FRONT);
+                    break;
+                case Movements.F_CCW :
+                    turnCCW(Faces.FRONT);
+                    break;
+                case Movements.R_CW :
+                    turnCW(Faces.RIGHT);
+                    break;
+                case Movements.R_CCW :
+                    turnCCW(Faces.RIGHT);
+                    break;
+                case Movements.B_CW :
+                    turnCW(Faces.BACK);
+                    break;
+                case Movements.B_CCW :
+                    turnCCW(Faces.BACK);
+                    break;
+                case Movements.D_CW :
+                    turnCW(Faces.DOWN);
+                    break;
+                case Movements.D_CCW :
+                    turnCCW(Faces.DOWN);
+                    break;
+                case Movements.L_CW :
+                    turnCW(Faces.LEFT);
+                    break;
+                case Movements.L_CCW :
+                    turnCCW(Faces.LEFT);
+                    break;
+            }
+        }
+    }
+
     public void makeCross() {
+        List<Integer>  sequence = null;
         int[] cross = {1, 3, 5, 7};
         int index;
         for (int edge : cross) {
@@ -186,232 +265,285 @@ public final class Cubies {
                 case 1:
                     break;
                 case 3:
-                    crossSequence.add(turnCCW(Faces.RIGHT));
-                    crossSequence.add(turnCCW(Faces.RIGHT));
-                    crossSequence.add(turnCW(Faces.DOWN));
-                    crossSequence.add(turnCCW(Faces.BACK));
-                    crossSequence.add(turnCCW(Faces.BACK));
+                    sequence = parseSequence("R R' D B' B");
                     break;
                 case 5:
-                    crossSequence.add(turnCCW(Faces.FRONT));
-                    crossSequence.add(turnCCW(Faces.FRONT));
-                    crossSequence.add(turnCW(Faces.DOWN));
-                    crossSequence.add(turnCW(Faces.DOWN));
-                    crossSequence.add(turnCCW(Faces.BACK));
-                    crossSequence.add(turnCCW(Faces.BACK));
+                    sequence = parseSequence("F' F' D D B' B'");
                     break;
                 case 7:
-                    crossSequence.add(turnCCW(Faces.LEFT));
-                    crossSequence.add(turnCCW(Faces.RIGHT));
-                    crossSequence.add(turnCCW(Faces.DOWN));
-                    crossSequence.add(turnCCW(Faces.BACK));
-                    crossSequence.add(turnCCW(Faces.BACK));
+                    sequence = parseSequence("L' R' D' B' B'");
                     break;
                 case 9:
-                    crossSequence.add(turnCW(Faces.FRONT));
-                    crossSequence.add(turnCW(Faces.UP));
-                    crossSequence.add(turnCW(Faces.RIGHT));
-                    crossSequence.add(turnCCW(Faces.UP));
+                    sequence = parseSequence("F U R U'");
                     break;
                 case 11:
-                    crossSequence.add(turnCW(Faces.UP));
-                    crossSequence.add(turnCW(Faces.RIGHT));
-                    crossSequence.add(turnCCW(Faces.UP));
+                    sequence = parseSequence("U R U'");
                     break;
                 case 13:
-                    turnCW(Faces.UP);
-                    turnCCW(Faces.FRONT);
-                    turnCW(Faces.RIGHT);
-                    turnCW(Faces.FRONT);
-                    turnCCW(Faces.UP);
+                    sequence = parseSequence("U F' R F U'");
                     break;
                 case 15:
-                    turnCCW(Faces.UP);
-                    turnCCW(Faces.LEFT);
-                    turnCW(Faces.UP);
+                    sequence = parseSequence("U' L' U");
                     break;
                 case 17:
-                    turnCW(Faces.RIGHT);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("R B");
                     break;
                 case 19:
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("B");
                     break;
                 case 21:
-                    turnCW(Faces.UP);
-                    turnCCW(Faces.RIGHT);
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("U R' U' B");
                     break;
                 case 23:
-                    turnCW(Faces.UP);
-                    turnCCW(Faces.RIGHT);
-                    turnCCW(Faces.RIGHT);
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("U R' R' U' B");
                     break;
                 case 25:
-                    turnCW(Faces.BACK);
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.LEFT);
-                    turnCW(Faces.UP);
+                    sequence = parseSequence("B U' L U");
                     break;
                 case 27:
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.LEFT);
-                    turnCW(Faces.UP);
+                    sequence = parseSequence("U' L U");
                     break;
                 case 29:
-                    turnCCW(Faces.BACK);
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.LEFT);
-                    turnCW(Faces.UP);
+                    sequence = parseSequence("B' U' L U");
                     break;
                 case 31:
-                    turnCW(Faces.UP);
-                    turnCCW(Faces.RIGHT);
-                    turnCCW(Faces.UP);
+                    sequence = parseSequence("U R' U'");
                     break;
                 case 33:
-                    turnCW(Faces.BACK);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("B B");
                     break;
                 case 35:
-                    turnCCW(Faces.DOWN);
-                    turnCW(Faces.BACK);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("D' B B");
                     break;
                 case 37:
-                    turnCCW(Faces.DOWN);
-                    turnCCW(Faces.DOWN);
-                    turnCW(Faces.BACK);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("D' D' B B");
                     break;
                 case 39:
-                    turnCW(Faces.DOWN);
-                    turnCW(Faces.BACK);
-                    turnCW(Faces.BACK);
+                    sequence = parseSequence("D B B");
                     break;
                 case 41:
-                    turnCCW(Faces.BACK);
+                    sequence = parseSequence("B'");
                     break;
                 case 43:
-                    turnCCW(Faces.LEFT);
-                    turnCCW(Faces.BACK);
+                    sequence = parseSequence("L' B'");
                     break;
                 case 45:
-                    turnCCW(Faces.LEFT);
-                    turnCCW(Faces.LEFT);
-                    turnCCW(Faces.BACK);
+                    sequence = parseSequence("L' L' B'");
                     break;
                 case 47:
-                    turnCCW(Faces.UP);
-                    turnCW(Faces.LEFT);
-                    turnCW(Faces.UP);
-                    turnCCW(Faces.BACK);
+                    sequence = parseSequence("U' L U B'");
                     break;
             }
+            runSequence(sequence);
             turnCCW(Faces.UP);
         }
     }
 
+    public void solveCorners(int index){
+        List<Integer>  sequence = null;
+        switch (index) {
+            case 0:
+                break;
+            case 2:
+                sequence = parseSequence("R D R'");
+                solveCorners(46);
+                break;
+            case 4:
+                sequence = parseSequence("R' D D R");
+                solveCorners(28);
+                break;
+            case 6:
+                sequence = parseSequence("F' D' F");
+                solveCorners(28);
+                break;
+            case 8:
+                sequence = parseSequence("F' B D' F B'");
+                break;
+            case 10:
+                sequence = parseSequence("R' D D R L' D D L D");
+                solveCorners(46);
+                break;
+            case 12:
+                sequence = parseSequence("D D");
+                solveCorners(28);
+                break;
+            case 14:
+                sequence = parseSequence("D'");
+                solveCorners(46);
+                break;
+            case 16:
+                sequence = parseSequence("R' D D R");
+                solveCorners(46);
+                break;
+            case 18:
+                sequence = parseSequence("R L' D L R'");
+                break;
+            case 20:
+                sequence = parseSequence("D");
+                solveCorners(28);
+                break;
+            case 22:
+                sequence = parseSequence("D D");
+                solveCorners(46);
+                break;
+            case 24:
+                sequence = parseSequence("B' D' B D D");
+                solveCorners(46);
+                break;
+            case 26:
+                solveCorners(28);
+                sequence = parseSequence("D' B D B");
+                break;
+            case 28:
+                sequence = parseSequence("B D B'");
+                break;
+            case 30:
+                sequence = parseSequence("D");
+                solveCorners(46);
+                break;
+            case 32:
+                sequence = parseSequence("R'" );
+                solveCorners(34);
+                break;
+            case 34:
+                sequence = parseSequence("L D L'");
+                solveCorners(22);
+                break;
+            case 36:
+                sequence = parseSequence("D'");
+                solveCorners(34);
+                break;
+            case 38:
+                sequence = parseSequence("D D");
+                solveCorners(34);
+                break;
+            case 40:
+                solveCorners(46);
+                solveCorners(30);
+                break;
+            case 42:
+                sequence = parseSequence("L D L'");
+                solveCorners(12);
+                break;
+            case 44:
+                sequence = parseSequence("D'");
+                solveCorners(28);
+                break;
+            case 46:
+                sequence = parseSequence("L' D' L");
+                break;
+        }
+        if (sequence != null) {
+            runSequence(sequence);
+        } else {
+            throw new MovementNotFoundException("Error with solving INDEX: " + index);
+        }
+
+    }
+
+    public void solveCorners() {
+        List<Integer>  sequence = null;
+        int[] cross = {0, 2, 4, 6};
+        int index;
+        for (int edge : cross) {
+            index = getIndex(cubies, edge);
+            solveCorners(index);
+
+            turnCCW(Faces.UP);
+        }
+    }
+
+    public void solveEdges() {
+        List<Integer>  sequence = null;
+        int[] cross = {11, 15};
+        int index;
+        for (int edge : cross) {
+            index = getIndex(cubies, edge);
+            solveEdges(index);
+            //turnCCW(Faces.UP);
+        }
+    }
+
+    public String sequenceEdgeBetweenFaces(String faceOnLeft, String faceOnRight) {
+        String F = faceOnLeft;
+        String R = faceOnRight;
+        return (R + "' D " + R +" D "+ F +" D' "+ F +"'");
+    }
+    public String sequenceEdgeBetweenFaces2(String faceOnLeft, String faceOnRight) {
+        String F = faceOnLeft;
+        String R = faceOnRight;
+        return(F + " D' "+ F + "' D' " + R + "' D " + R);
+    }
+
+    public void solveEdges(int index){
+        List<Integer>  sequence = null;
+        switch (index) {
+            case 11:
+                break;
+            case 13:
+                sequence = parseSequence("D'");
+                solveEdges(45);
+                break;
+            case 15:
+                sequence = parseSequence(sequenceEdgeBetweenFaces("L", "F") + " D D " +
+                           sequenceEdgeBetweenFaces("L", "F"));
+                break;
+            case 19:
+                sequence = parseSequence(sequenceEdgeBetweenFaces("R", "B") +" D' " +
+                        sequenceEdgeBetweenFaces2("R", "B"));
+                break;
+            case 21:
+                sequence = parseSequence("D D");
+                solveEdges(45);
+                break;
+            case 23:
+                solveEdges(45);
+                solveEdges(29);
+                break;
+            case 27:
+                sequence = parseSequence(sequenceEdgeBetweenFaces("B", "L") + " D D " +
+                        sequenceEdgeBetweenFaces("B", "L"));
+                break;
+            case 29:
+                sequence = parseSequence("D");
+                solveEdges(45);
+                break;
+            case 31:
+                sequence = parseSequence(sequenceEdgeBetweenFaces("R", "B") +" D' " +
+                        sequenceEdgeBetweenFaces("R", "B"));
+                break;
+            case 33:
+                sequence = parseSequence("D D");
+                solveEdges(37);
+                break;
+            case 35:
+                sequence = parseSequence("D");
+                solveEdges(37);
+                break;
+            case 37:
+                sequence = parseSequence("F D' F' D' R' D R");
+                break;
+            case 39:
+                sequence = parseSequence("D'");
+                solveCorners(37);
+                break;
+            case 43:
+                sequence = parseSequence("B' D' B D D");
+                solveCorners(46);
+                break;
+            case 45:
+                sequence = parseSequence("R' D R D F D' F'");
+                break;
+            case 47:
+                sequence = parseSequence("B D B'");
+                break;
+        }
+        if (sequence != null) {
+            runSequence(sequence);
+        } else {
+            throw new MovementNotFoundException("Error with solving INDEX: " + index);
+        }
+
+    }
 
 }
-
-/*
- String[] cubiesOrder  = new String[] {
-            "1", "2", "3", "4", "6", "7", "8", "9",
-            "11", "12", "13", "14", "16", "17", "18", "19",
-            "21", "22", "23", "24", "26", "27", "28", "29",
-            "31", "32", "33", "34", "36", "37", "38", "39",
-            "41", "42", "43", "44", "46", "47", "48", "49",
-            "51", "52", "53", "54", "56", "57", "58", "59"
-    };
-
-
-
-    static int[] cubiesOrderInt2  = new int[] {
-            7, 8, 1, 2, 3, 4, 5, 6,
-            21, 22, 23, 14, 15, 16, 17, 18,
-            31, 32, 33, 24, 25, 26, 27, 28,
-            53, 54, 55, 34, 35, 36, 37, 38,
-            41, 42, 43, 44, 45, 46, 47, 48,
-            51, 52, 11, 12, 13, 56, 57, 58,
-    };
-
-    static int[] cubiesOrderInt3  = new int[] {
-            3, 4, 5, 6, 7, 8, 1, 2,
-            21, 22, 23, 14, 15, 16, 17, 18,
-            31, 32, 33, 24, 25, 26, 27, 28,
-            53, 54, 55, 34, 35, 36, 37, 38,
-            41, 42, 43, 44, 45, 46, 47, 48,
-            51, 52, 11, 12, 13, 56, 57, 58,
-    };
-
-        static int[] changeToFrontd(int[] pos) {//UFRBDL
-        return new int[] {
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7],
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15],
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23],
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31],
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39],
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47]
-
-        };
-    }
-
-    static int[] changeToFront(int[] pos) {//UFRBDL
-        return new int[] {
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15],
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23],
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31],
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39],
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47],
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7]
-        };
-    }
-
-    static int[] changeToRight(int[] pos) {//FRBDLU
-        return new int[] {
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23],
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31],
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39],
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47],
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7],
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15]
-        };
-    }
-
-    static int[] changeToBack(int[] pos) {//RBDLUF
-        return new int[] {
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31],
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39],
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47],
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7],
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15],
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23]
-        };
-    }
-
-    static int[] changeToDown(int[] pos) {//BDLUFR
-        return new int[] {
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39],
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47],
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7],
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15],
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23],
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31]
-        };
-    }
-
-    static int[] changeToLeft(int[] pos) {//DLUFRB
-        return new int[] {
-                pos[40], pos[41], pos[42], pos[43], pos[44], pos[45], pos[46], pos[47],
-                pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7],
-                pos[8], pos[9], pos[10], pos[11], pos[12], pos[13], pos[14], pos[15],
-                pos[16], pos[17], pos[18], pos[19], pos[20], pos[21], pos[22], pos[23],
-                pos[24], pos[25], pos[26], pos[27], pos[28], pos[29], pos[30], pos[31],
-                pos[32], pos[33], pos[34], pos[35], pos[36], pos[37], pos[38], pos[39]
-        };
-    }
-* */

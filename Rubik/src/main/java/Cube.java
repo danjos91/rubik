@@ -4,6 +4,7 @@ import processing.core.*;
 
 
 import java.awt.*;
+import java.util.List;
 
 public class Cube extends PApplet {
 
@@ -14,8 +15,10 @@ public class Cube extends PApplet {
     String[] allMoves = {"F", "B", "U", "D", "L", "R"};
     String sequence = "";
     int counter = 0;
-    int[] moves;
-    boolean started = false;
+    List<Integer> moves;
+    List<Integer> moves1;
+    boolean disorder = false;
+    boolean solve = false;
 
     Move moveU_CW;
     Move moveU_CCW;
@@ -70,7 +73,10 @@ public class Cube extends PApplet {
         Cubies.getInstance().turnCW(Faces.RIGHT);
         System.out.println("\nSolution:");
         Cubies.getInstance().makeCross();
-        moves = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        //moves = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        //moves = Cubies.getInstance().parseSequence("F' B D' F B'");
+        moves = Cubies.getInstance().parseSequence("R' D D R L' D D L D L' D' L");
+        moves1 = Cubies.getInstance().parseSequence("L' D L D' L' D' D' L R' D' D' R");
 
     }
 
@@ -121,16 +127,30 @@ public class Cube extends PApplet {
         rotateX(0.1f);
         scale(60);
 
-        if(started){
+        if(disorder){
             move.update();
             if(frameCount % 20 == 0) {
                 if(move.finished()) {
-                    if (counter < moves.length) {
-                        move(moves[counter]);
+                    if (counter < moves.size()) {
+                        move(moves.get(counter));
                         counter++;
                     } else {
                         counter = 0;
-                        started = false;
+                        disorder = false;
+                    }
+                }
+            }
+        }
+        if(solve){
+            move.update();
+            if(frameCount % 20 == 0) {
+                if(move.finished()) {
+                    if (counter < moves.size()) {
+                        move(moves1.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solve = false;
                     }
                 }
             }
@@ -215,7 +235,11 @@ public class Cube extends PApplet {
     public void keyPressed() {
         switch (key){
             case '1':
-                started = true;
+                disorder = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '2':
+                solve = true;
                 move = new Move(0,0,0,0 );
                 break;
             case 'q':
