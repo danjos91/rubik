@@ -15,8 +15,8 @@ public class Cube extends PApplet {
     String[] allMoves = {"F", "B", "U", "D", "L", "R"};
     String sequence = "";
     int counter = 0;
-    List<Integer> moves;
-    List<Integer> moves1;
+    List<Movements> moves;
+    List<Movements> moves1;
     boolean disorder = false;
     boolean solve = false;
 
@@ -33,6 +33,11 @@ public class Cube extends PApplet {
     Move moveL_CW;
     Move moveL_CCW;
     Move move;
+
+    String solveSequence = "";
+    String solveCross = "";
+    String solveCorners = "";
+    String solveEdges = "";
 
     public static void main(String[] args) {
         PApplet.main("Cube");
@@ -67,17 +72,52 @@ public class Cube extends PApplet {
         moveL_CW = new Move(-1, 0, 0, -1);
         moveL_CCW = new Move(-1, 0, 0, 1);
 
-        System.out.println("Desordering:");
-        Cubies.getInstance().turnCW(Faces.BACK);
-        Cubies.getInstance().turnCW(Faces.BACK);
-        Cubies.getInstance().turnCW(Faces.RIGHT);
-        System.out.println("\nSolution:");
-        Cubies.getInstance().makeCross();
-        //moves = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-        //moves = Cubies.getInstance().parseSequence("F' B D' F B'");
-        moves = Cubies.getInstance().parseSequence("R' D D R L' D D L D L' D' L");
-        moves1 = Cubies.getInstance().parseSequence("L' D L D' L' D' D' L R' D' D' R");
 
+        Cubies.getInstance().initCube();
+        String sequence = " D' F";
+        moves = Cubies.getInstance().parseSequence(sequence);
+        Cubies.getInstance().printCube();
+        Cubies.getInstance().runSequence(moves);
+        Cubies.getInstance().updateCubies();
+        Cubies.getInstance().printCube();
+        //solveCross = Cubies.getInstance().makeCross();
+        //solveCorners = Cubies.getInstance().solveCorners();
+        //solveSequence = solveCross + solveCorners;
+        //moves1 = Cubies.getInstance().parseSequence(solveSequence);
+        //System.out.println("sequence solve: " + solveSequence);
+        //System.out.println("moves1: " + moves1);
+        //Faces.FRONT.rotateCW();
+        //System.out.println(Faces.FRONT.toString());
+        /*System.out.println("Disorder sequence:");
+
+        Cubies.getInstance().printCube();
+        String sequence = "F";
+        System.out.println("movement: " + sequence);
+        moves = Cubies.getInstance().parseSequence(sequence);
+        Cubies.getInstance().runSequence(moves);
+        Cubies.getInstance().printCube();
+        sequence = "F'";
+        System.out.println("movement: " + sequence);
+
+        Cubies.getInstance().runSequence(moves);
+        Cubies.getInstance().printCube();
+
+
+
+
+        //solveSequence += Cubies.getInstance().solveCorners();
+        //solveSequence += Cubies.getInstance().solveEdges();
+        System.out.println("\nSolution sequence:");
+        System.out.println(solveSequence);
+        */
+
+    }
+
+    public String getSolveSequence(){
+        return solveSequence;
+    }
+    public void setSolveSequence(String solveSequence) {
+        this.solveSequence = solveSequence;
     }
 
     void turnY(int index, int dir) {
@@ -145,7 +185,7 @@ public class Cube extends PApplet {
             move.update();
             if(frameCount % 20 == 0) {
                 if(move.finished()) {
-                    if (counter < moves.size()) {
+                    if (counter < moves1.size()) {
                         move(moves1.get(counter));
                         counter++;
                     } else {
@@ -177,53 +217,53 @@ public class Cube extends PApplet {
     }
 
 
-    public void move(int movements){
+    public void move(Movements movements){
         switch (movements){
-            case Movements.U_CW:
+            case U_CW:
                 System.out.print("U ");
                 move = moveU_CW;
                 break;
-            case Movements.U_CCW:
+            case U_CCW:
                 System.out.print("U' ");
                 move = moveU_CCW;
                 break;
-            case Movements.F_CW:
+            case F_CW:
                 System.out.print("F ");
                 move = moveF_CW;
                 break;
-            case Movements.F_CCW:
+            case F_CCW:
                 System.out.print("F' ");
                 move = moveF_CCW;
                 break;
-            case Movements.R_CW:
+            case R_CW:
                 System.out.print("R ");
                 move = moveR_CW;
                 break;
-            case Movements.R_CCW:
+            case R_CCW:
                 System.out.print("R' ");
                 move = moveR_CCW;
                 break;
-            case Movements.B_CW:
+            case B_CW:
                 System.out.print("B ");
                 move = moveB_CW;
                 break;
-            case Movements.B_CCW:
+            case B_CCW:
                 System.out.print("B' ");
                 move = moveB_CCW;
                 break;
-            case Movements.D_CW:
+            case D_CW:
                 System.out.print("D ");
                 move = moveD_CW;
                 break;
-            case Movements.D_CCW:
+            case D_CCW:
                 System.out.print("D' ");
                 move = moveD_CCW;
                 break;
-            case Movements.L_CW:
+            case L_CW:
                 System.out.print("L ");
                 move = moveL_CW;
                 break;
-            case Movements.L_CCW:
+            case L_CCW:
                 System.out.print("L' ");
                 move = moveL_CCW;
                 break;

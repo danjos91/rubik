@@ -1,15 +1,30 @@
-public class Movements {
-    public static final int U_CW= 0;
-    public static final int U_CCW= 1;
-    public static final int F_CW= 2;
-    public static final int F_CCW= 3;
-    public static final int R_CW= 4;
-    public static final int R_CCW= 5;
-    public static final int B_CW= 6;
-    public static final int B_CCW= 7;
-    public static final int D_CW= 8;
-    public static final int D_CCW= 9;
-    public static final int L_CW= 10;
-    public static final int L_CCW= 11;
+public enum Movements {
+    U_CW(0),
+    U_CCW(1),
+    F_CW(2),
+    F_CCW(3),
+    R_CW(4),
+    R_CCW(5),
+    B_CW(6),
+    B_CCW(7),
+    D_CW(8),
+    D_CCW(9),
+    L_CW(10),
+    L_CCW(11),
+    ;
 
+    int id;
+    Movements(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Movements getMovement(int id) {
+        if (id == this.id)
+            return Movements.this;
+        return null;
+    }
 }
