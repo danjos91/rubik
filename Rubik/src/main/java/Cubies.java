@@ -349,29 +349,32 @@ public final class Cubies {
     }
 
 
-    String[] orderFaces = {" U", " F", " R", " B", " D", " L"};
+    String[] orderFaces = {" U", " F", " R", " B", " L", " D"};
 
 
     public String solveEdges() {
         String result = "";
         String solution;
+        List<Movements> sequence;
         int[] edges = {11, 19, 27, 43};
         List<String[]> orderY = new ArrayList<String[]>();
-        String[] orderFaces1 = {" U", " R", " B", " L", " D", " F"};
-        String[] orderFaces2 = {" U", " B", " L", " F", " D", " R"};
-        String[] orderFaces3 = {" U", " L", " F", " R", " D", " B"};
+        String[] orderFaces1 = {" U", " R", " B", " L", " F", " D"};
+        String[] orderFaces2 = {" U", " B", " L", " F", " R", " D"};
+        String[] orderFaces3 = {" U", " L", " F", " R", " B", " D"};
         orderY.add(orderFaces);
         orderY.add(orderFaces1);
         orderY.add(orderFaces2);
         orderY.add(orderFaces3);
         int index;
-        int i = 0;
+        int i = 1;
         for (int edge : edges) {
             index = getIndex(cubies, edge);
-            //System.out.println("Edge: " + edge);
             solution = solveEdges(index);
-            orderFaces = orderY.get(i++);
-            result += solution;
+            sequence = parseSequence(solution);
+            System.out.println("For EDGE" + edge + " in index " + index + " the solution is " + solution + " U'");
+            runSequence(sequence);
+            orderFaces = orderY.get((i++)%4);
+            result += solution;// result is for graphics
         }
         return result;
     }
@@ -393,74 +396,60 @@ public final class Cubies {
         String front = orderFaces[1];
         String right = orderFaces[2];
         String back = orderFaces[3];
-        String down = orderFaces[4];
-        String left = orderFaces[5];
+        String left = orderFaces[4];
+        String down = orderFaces[5];
         String minus = "'";
-        List<Movements> sequence;
+
         switch (index) {
             case 13:
-                solution = up + "'";
-                solveEdges(45);
+                solution = down + "'" + solveEdges(37);
                 break;
             case 15:
-                solution = sequenceEdgeBetweenFaces(left, front) + down + down;
-                solveEdges(45);
+                solution = sequenceEdgeBetweenFaces(left, front) + down + down + solveEdges(37);
                 break;
             case 19:
-                solution = sequenceEdgeBetweenFaces(right, back) + down + minus;
-                solveEdges(37);
+                solution = sequenceEdgeBetweenFaces(right, back) + down + minus + solveEdges(45);
                 break;
             case 21:
-                solution = down + down;
-                solveEdges(45);
+                solution = down + down + solveEdges(37);
                 break;
             case 23:
-                solveEdges(45);
-                solveEdges(29);
+                solution = solveEdges(37) + solveEdges(29);
                 break;
             case 27:
-                solution = sequenceEdgeBetweenFaces(back, left);
-                solveEdges(33);
+                solution = sequenceEdgeBetweenFaces(back, left) + solveEdges(41);
                 break;
             case 29:
-                solution = down;
-                solveEdges(45);
+                solution = down +  solveEdges(37);
                 break;
             case 31:
-                solution = sequenceEdgeBetweenFaces(right, back);
-                solveEdges(45);
+                solution = sequenceEdgeBetweenFaces(right, back) + solveEdges(37);
                 break;
-            case 33:
-                solution = down + down;
-                solveEdges(37);
+            case 41:
+                solution = down + minus + solveEdges(45);
                 break;
-            case 35:
-                solution = down;
-                solveEdges(37);
+            case 43:
+                solution = down + minus + solveEdges(45);
                 break;
-            case 37://main sequence mirror
+            case 45://main sequence mirror
                 solution = front + down + minus + front + minus + down +
                         minus + right + minus + down + right;
                 break;
-            case 39:
-                solution = down + minus;
-                solveCorners(37);
+            case 47:
+                solution = down + minus + solveCorners(45);
                 break;
-            case 43:
-                solution = sequenceEdgeBetweenFaces(left, front) + down;
-                solveEdges(37);
+            case 35:
+                solution = sequenceEdgeBetweenFaces(left, front) + down + solveEdges(45);
                 break;
-            case 45://main sequence
+            case 37://main sequence
                 solution = right + minus + down + right + down + front +
                         down + minus + front + minus;
                 break;
-            case 47:
-                solution = sequenceEdgeBetweenFaces(back, left);
-                solveEdges(13);
+            case 39:
+                solution = sequenceEdgeBetweenFaces(back, left) + solveEdges(13);;
                 break;
         }
-        sequence = parseSequence(solution);
-        runSequence(sequence);
+
         return solution;
     }
 

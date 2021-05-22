@@ -85,12 +85,14 @@ public class Cube extends PApplet {
         //Cubies.getInstance().printCube();
         System.out.println("-----------------SOLVER CORNERS-----------------");
         solveCorners = Cubies.getInstance().solveCorners();
+        System.out.println("-----------------SOLVER EDGES-----------------");
+        solveEdges = Cubies.getInstance().solveEdges();
         //Cubies.getInstance().printCube();
         solveSequence = solveCross + solveCorners;
-        moves1 = Cubies.getInstance().parseSequence(solveCross);
-        moves3 = Cubies.getInstance().parseSequence(solveCorners);
-        System.out.println("sequence solve: " + solveSequence);
-        System.out.println("moves1: " + moves1);
+        moves1 = Cubies.getInstance().parseSequence(solveSequence);
+        moves3 = Cubies.getInstance().parseSequence(solveEdges);
+        System.out.println("sequence firts layer: " + solveSequence);
+        System.out.println("sequence for solve edges: " + solveEdges);
     }
 
     public String getSolveSequence(){
