@@ -17,8 +17,10 @@ public class Cube extends PApplet {
     int counter = 0;
     List<Movements> moves;
     List<Movements> moves1;
+    List<Movements> moves3;
     boolean disorder = false;
     boolean solve = false;
+    boolean solve3 = false;
 
     Move moveU_CW;
     Move moveU_CCW;
@@ -74,43 +76,21 @@ public class Cube extends PApplet {
 
 
         Cubies.getInstance().initCube();
-        String sequence = " D' F";
+        String sequence = " B B F R' L'";
         moves = Cubies.getInstance().parseSequence(sequence);
         Cubies.getInstance().printCube();
         Cubies.getInstance().runSequence(moves);
-        Cubies.getInstance().updateCubies();
-        Cubies.getInstance().printCube();
-        //solveCross = Cubies.getInstance().makeCross();
-        //solveCorners = Cubies.getInstance().solveCorners();
-        //solveSequence = solveCross + solveCorners;
-        //moves1 = Cubies.getInstance().parseSequence(solveSequence);
-        //System.out.println("sequence solve: " + solveSequence);
-        //System.out.println("moves1: " + moves1);
-        //Faces.FRONT.rotateCW();
-        //System.out.println(Faces.FRONT.toString());
-        /*System.out.println("Disorder sequence:");
-
-        Cubies.getInstance().printCube();
-        String sequence = "F";
-        System.out.println("movement: " + sequence);
-        moves = Cubies.getInstance().parseSequence(sequence);
-        Cubies.getInstance().runSequence(moves);
-        Cubies.getInstance().printCube();
-        sequence = "F'";
-        System.out.println("movement: " + sequence);
-
-        Cubies.getInstance().runSequence(moves);
-        Cubies.getInstance().printCube();
-
-
-
-
-        //solveSequence += Cubies.getInstance().solveCorners();
-        //solveSequence += Cubies.getInstance().solveEdges();
-        System.out.println("\nSolution sequence:");
-        System.out.println(solveSequence);
-        */
-
+        System.out.println("-----------------MAKE CROSS-----------------");
+        solveCross = Cubies.getInstance().makeCross();
+        //Cubies.getInstance().printCube();
+        System.out.println("-----------------SOLVER CORNERS-----------------");
+        solveCorners = Cubies.getInstance().solveCorners();
+        //Cubies.getInstance().printCube();
+        solveSequence = solveCross + solveCorners;
+        moves1 = Cubies.getInstance().parseSequence(solveCross);
+        moves3 = Cubies.getInstance().parseSequence(solveCorners);
+        System.out.println("sequence solve: " + solveSequence);
+        System.out.println("moves1: " + moves1);
     }
 
     public String getSolveSequence(){
@@ -191,6 +171,20 @@ public class Cube extends PApplet {
                     } else {
                         counter = 0;
                         solve = false;
+                    }
+                }
+            }
+        }
+        if(solve3){
+            move.update();
+            if(frameCount % 20 == 0) {
+                if(move.finished()) {
+                    if (counter < moves3.size()) {
+                        move(moves3.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solve3 = false;
                     }
                 }
             }
@@ -280,6 +274,10 @@ public class Cube extends PApplet {
                 break;
             case '2':
                 solve = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '3':
+                solve3 = true;
                 move = new Move(0,0,0,0 );
                 break;
             case 'q':

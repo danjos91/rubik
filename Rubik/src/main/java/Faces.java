@@ -79,9 +79,12 @@ public class Faces {//"FRBL"
             Cubies.getInstance().right.setVectorFace(neighborSideRight, subNeighborVectorDown);
             Cubies.getInstance().front.setVectorFace(neighborSideUp, subNeighborVectorRight);
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorUp);
-            System.out.println("check");
         }
         Cubies.getInstance().updateCubies();
+        if (Cubies.getInstance().print) {
+            System.out.println("Movement :" + name.toUpperCase() + "'");
+            Cubies.getInstance().printCube();
+        }
     }
 
     public void rotateCW(){
@@ -125,6 +128,10 @@ public class Faces {//"FRBL"
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorDown);
         }
         Cubies.getInstance().updateCubies();
+        if (Cubies.getInstance().print) {
+            System.out.println("Movement :" + name.toUpperCase());
+            Cubies.getInstance().printCube();
+        }
     }
 
     public SubVector getSubVector(int side) {

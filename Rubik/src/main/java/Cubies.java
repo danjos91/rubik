@@ -4,6 +4,7 @@ import java.util.List;
 public final class Cubies {
 
     private static Cubies instance;
+    public boolean print = true;
     public static Cubies getInstance() {
         if (instance == null) {
             instance = new Cubies();
@@ -154,30 +155,29 @@ public final class Cubies {
                     break;
             }
             updateCubies();
-            System.out.println("MOVEMENT " + move);
-            printCube();
         }
 
     }
 
     public String makeCross() {
         int[] cross = {1, 3, 5, 7};
+        List<Movements>  sequence = null;
         String result = "";
         String solution = "";
         int index;
         for (int edge : cross) {
             index = getIndex(cubies, edge);
             solution = makeCross(index);
-            System.out.println("For edge " + edge + " in index " + index + "the solution is " + solution + " U'");
+            System.out.println("For EDGE " + edge + " in index " + index + "the solution is " + solution + " U'");
+            sequence = parseSequence(solution);
+            runSequence(sequence);
             up.rotateCCW();
-            updateCubies();
             result += solution + " U'";
         }
         return result;
     }
 
     public String makeCross(int index) {
-        List<Movements>  sequence = null;
         String solution = "";
         switch (index) {
             case 3:
@@ -250,46 +250,28 @@ public final class Cubies {
                 solution = " D'" + makeCross(45);
                 break;
         }
-        sequence = parseSequence(solution);
-        runSequence(sequence);
         return solution;
     }
 
-    public void printCube(){
-        System.out.println("-----------------------------------------\n   \t\t\tUP\n" +
-                "   \t\t\t" + cubies[0] + " "+ cubies[1] + " "         + cubies[2] + "   \n" +
-                "   \t\t\t" + cubies[7] + " "+"\033[43mU \033[0m"+ " " + cubies[3] + "   \n" +
-                "   \t\t\t" + cubies[6] + " "+ cubies[5] + " "         + cubies[4] + "   \n" +
-                "LEFT\t\t_________\t RIGHT\t\t BACK\n" +
-                cubies[32] + " "+ cubies[33] + " "          + cubies [34] + "   \t" + cubies[8] + " " + cubies[9] + " "          + cubies[10] + "   \t" + cubies[16] + " "+ cubies[17] + " " + cubies[18] + "   \t" + cubies[24] + " " + cubies[25] + " " + cubies[26] + "\n" +
-                cubies[39] + " "+ "\033[41mL \033[0m" + " " + cubies [35] + "   \t" + cubies[15] + " " +"\033[42mF \033[0m"+ " " + cubies[11] + "   \t" + cubies[23] + " "+   "\033[48:2:255:165:0mR \033[0m"    + " " + cubies[19]  + "   \t" + cubies[31] + " " +   "\033[44mB \033[0m"     + " " + cubies[27] + "\n" +
-                cubies[38] + " "+ cubies[37] + " "          + cubies [36] + "   \t" + cubies[14] + " " + cubies[13] + " "        + cubies[12] + "   \t" + cubies[22] + " "+ cubies[21] + " " + cubies[20] + "   \t" + cubies[30] + " " + cubies[29] + " " + cubies[28] + "\n" +
-                "   \t\t\t_________\n" +
-                "   \t\t\t" + cubies[40] + " " + cubies[41] + " " + cubies[42] + "\n" +
-                "   \t\t\t" + cubies[47] + " " +   "\033[47mD \033[0m"    + " " + cubies[43] + "\n" +
-                "   \t\t\t" + cubies[46] + " " + cubies[45] + " " + cubies[44] + "\n" +
-                "   \t\t\t DOWN");
-    }
-
     public String solveCorners() {
-        int[] cross = {0, 2, 4, 6};
+        List<Movements>  sequence = null;
+        int[] corners = {0, 2, 4, 6};
         String result = "";
         String solution = "";
         int index;
-        for (int corner : cross) {
+        for (int corner : corners) {
             index = getIndex(cubies, corner);
-            printCube();
             solution = solveCorners(index);
-            System.out.println("For corner " + corner + " in index " + index + " the solution is " + solution + " U'");
+            System.out.println("For CORNER " + corner + " in index " + index + " the solution is " + solution + " U'");
+            sequence = parseSequence(solution);
+            runSequence(sequence);
             up.rotateCCW();
-            updateCubies();
             result += solution + " U'";
         }
         return result;
     }
 
     private String solveCorners(int index){
-        List<Movements>  sequence = null;
         String solution = "";
         switch (index) {
             case 2:
@@ -363,8 +345,6 @@ public final class Cubies {
                 solution = " B D D B' D'" + solveCorners(28);
                 break;
         }
-        sequence = parseSequence(solution);
-        runSequence(sequence);
         return solution;
     }
 
@@ -482,6 +462,22 @@ public final class Cubies {
         sequence = parseSequence(solution);
         runSequence(sequence);
         return solution;
+    }
+
+    public void printCube(){
+        System.out.println("-----------------------------------------\n   \t\t\tUP\n" +
+                "   \t\t\t" + cubies[0] + " "+ cubies[1] + " "         + cubies[2] + "   \n" +
+                "   \t\t\t" + cubies[7] + " "+"\033[43mU \033[0m"+ " " + cubies[3] + "   \n" +
+                "   \t\t\t" + cubies[6] + " "+ cubies[5] + " "         + cubies[4] + "   \n" +
+                "LEFT\t\t_________\t RIGHT\t\t BACK\n" +
+                cubies[32] + " "+ cubies[33] + " "          + cubies [34] + "   \t" + cubies[8] + " " + cubies[9] + " "          + cubies[10] + "   \t" + cubies[16] + " "+ cubies[17] + " "                +       cubies[18] + "   \t" + cubies[24] + " " + cubies[25] + " " + cubies[26] + "\n" +
+                cubies[39] + " "+ "\033[41mL \033[0m" + " " + cubies [35] + "   \t" + cubies[15] + " " +"\033[42mF \033[0m"+ " " + cubies[11] + "   \t" + cubies[23] + " "+ "\033[48:2:255:165:0mR \033[0m" + " " + cubies[19]  + "   \t" + cubies[31] + " " +   "\033[44mB \033[0m"     + " " + cubies[27] + "\n" +
+                cubies[38] + " "+ cubies[37] + " "          + cubies [36] + "   \t" + cubies[14] + " " + cubies[13] + " "        + cubies[12] + "   \t" + cubies[22] + " "+ cubies[21] + " "                 +      cubies[20] + "   \t" + cubies[30] + " " + cubies[29] + " " + cubies[28] + "\n" +
+                "   \t\t\t_________\n" +
+                "   \t\t\t" + cubies[40] + " " + cubies[41] + " " + cubies[42] + "\n" +
+                "   \t\t\t" + cubies[47] + " " +   "\033[47mD \033[0m"    + " " + cubies[43] + "\n" +
+                "   \t\t\t" + cubies[46] + " " + cubies[45] + " " + cubies[44] + "\n" +
+                "   \t\t\t DOWN");
     }
 
 }
