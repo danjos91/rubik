@@ -71,10 +71,8 @@ public class Cube extends PApplet {
                                 "Usage example: Arguments example: -m 'F F D D L L'");
                         return;
                     }
-
-                    PApplet.main("Cube");
-                    return;
                 }
+                PApplet.main("Cube");
             } catch (Exception e) {
                 System.out.println("Error. Please check the arguments.\n" +
                         "Usage example: Arguments example: -m 'F F D D L L'");
