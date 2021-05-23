@@ -8,7 +8,7 @@ import java.util.List;
 public class Cube extends PApplet {
 
     int dim = 3;
-    int speed = 15;
+    int speed = 10;
     int index = 0;
     private PeasyCam cam;
     Box[] cube = new Box[dim*dim*dim];
@@ -53,18 +53,18 @@ public class Cube extends PApplet {
         if (args.length >= 1 && args.length < 3){
             try {
                 if (args.length == 1){
-                    Cubies.getInstance().parseSequence(args[0]);
-                    Cubies.getInstance().setInitialSequence(args[0]);
+                    Cubies.getInstance().parseSequence(Cubies.getInstance().parseSequenceInitial(args[0]));
+                    Cubies.getInstance().setInitialSequence(Cubies.getInstance().parseSequenceInitial(args[0]));
                 } else {
                     if (args[0].equals("-m")){
-                        Cubies.getInstance().parseSequence(args[1]);
+                        Cubies.getInstance().parseSequence(Cubies.getInstance().parseSequenceInitial(args[1]));
                         Cubies.getInstance().activatePrintMoves();
-                        Cubies.getInstance().setInitialSequence(args[1]);
+                        Cubies.getInstance().setInitialSequence(Cubies.getInstance().parseSequenceInitial(args[1]));
                     }
                     else if (args[1].equals("-m")){
-                        Cubies.getInstance().parseSequence(args[0]);
+                        Cubies.getInstance().parseSequence(Cubies.getInstance().parseSequenceInitial(args[0]));
                         Cubies.getInstance().activatePrintMoves();
-                        Cubies.getInstance().setInitialSequence(args[0]);
+                        Cubies.getInstance().setInitialSequence(Cubies.getInstance().parseSequenceInitial(args[0]));
                     }
                     else {
                         System.out.println("Error. Please check the arguments.\n" +
@@ -75,7 +75,8 @@ public class Cube extends PApplet {
                 PApplet.main("Cube");
             } catch (Exception e) {
                 System.out.println("Error. Please check the arguments.\n" +
-                        "Usage example: Arguments example: -m 'F F D D L L'");
+                        "Usage example: Arguments example: -m 'F F D D L L'\n" + e.getMessage());
+                e.printStackTrace();
             }
 
 
@@ -146,13 +147,6 @@ public class Cube extends PApplet {
         System.out.println("Run initial sequence -> press 1\n" +
                             "run solver -> press 2\nExit -> press 7\n" +
                             "Find more controls on readme file");
-    }
-
-    public String getSolveSequence(){
-        return solveSequence;
-    }
-    public void setSolveSequence(String solveSequence) {
-        this.solveSequence = solveSequence;
     }
 
     void turnY(int index, int dir) {

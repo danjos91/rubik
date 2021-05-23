@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -195,6 +196,7 @@ public final class Cubies {
         for (int edge : cross) {
             index = getIndex(cubies, edge);
             solution = makeCross(index);
+            //System.out.println("for edge " + edge + " in index " + index + " solution is " + solution);
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
@@ -291,6 +293,7 @@ public final class Cubies {
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
+            //System.out.println("for corner " + corner + " in index " + index + " solution is " + solution);
             result += solution + " U'";
         }
         return result;
@@ -312,7 +315,7 @@ public final class Cubies {
                 solution = " F' B D' F B'";
                 break;
             case 10:
-                solution = " F D D" + solveCorners(28);
+                solution = " F D D F'" + solveCorners(28);
                 break;
             case 12:
                 solution = " D D" + solveCorners(28);
@@ -331,7 +334,6 @@ public final class Cubies {
                 break;
             case 22:
                 solution = " D D" + solveCorners(38);
-                solveCorners(46);
                 break;
             case 24:
                 solution = " B' D' B D D" + solveCorners(46);
@@ -411,6 +413,7 @@ public final class Cubies {
                     index = ((index - 8) + 8) % 32 + 8;
             }
             solution = solveEdges(index);
+            System.out.println("For edge " + edge + " with index " + index + " solution is " + solution);
             sequence = parseSequence(solution);
             runSequence(sequence);
             orderFaces = orderY.get((i++)%4);
@@ -476,7 +479,7 @@ public final class Cubies {
                         minus + right + minus + down + right;
                 break;
             case 47:
-                solution = down + minus + solveCorners(45);
+                solution = down + minus + solveEdges(45);
                 break;
             case 35:
                 solution = sequenceEdgeBetweenFaces(left, front) + down + solveEdges(45);
@@ -500,7 +503,7 @@ public final class Cubies {
         String result = "";
         String solution = "";
         String changeTwoCornerPlaces = " R' D' R F D F' R' D R D D";
-        String changeTwoCornerDiagonalPlaces = " R' D' R F D' D' F' R' D R D'";
+        //String changeTwoCornerDiagonalPlaces = " R' D' R F D' D' F' R' D R D'";
         int index;
         index = getIndex(cubies, 14);
         switch (index) {
@@ -533,7 +536,8 @@ public final class Cubies {
             case 28:
             case 38:
             case 46:
-                solution = changeTwoCornerDiagonalPlaces;
+                solution = " D D" + changeTwoCornerPlaces + " D D";
+                solution += " D'" + changeTwoCornerPlaces + " D";
                 break;
         }
         sequence = parseSequence(solution);
@@ -611,6 +615,7 @@ public final class Cubies {
         int index = getIndex(cubies, 13);
         int subindex;
         String solution = "";
+        String result = "";
         List<Movements>  sequence;
         String triangleRotateCW = " L' R F R' L D D L' R F R' L";
         String triangleRotateCCW = " L' R F' R' L D D L' R F' R' L";
@@ -622,31 +627,46 @@ public final class Cubies {
                     case 29:
                     case 45:
                         solution = triangleRotateCCW;
-                        break;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                        return solution;
                     case 37:
                     case 47:
                         solution = triangleRotateCW;
-                        break;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                        return solution;
                 }
                 break;
             case 21:
             case 43:
-                solution = " D" + triangleRotateCCW + " D'" + orderLastCross();
-                orderLastCross();
+                solution = " D" + triangleRotateCCW + " D'";
+                result = solution;
+                sequence = parseSequence(solution);
+                runSequence(sequence);
+                solution = orderLastCorners();
+                result += solution;
                 break;
             case 29:
             case 45:
                 solution = " D" + triangleRotateCW + " D'";
-                orderLastCross();
+                result = solution;
+                sequence = parseSequence(solution);
+                runSequence(sequence);
+                solution = orderLastCorners();
+                result += solution;
                 break;
             case 37:
             case 47:
-                solution = " D'" + triangleRotateCW + " D" + orderLastCross();
+                solution = " D'" + triangleRotateCW + " D";
+                result = solution;
+                sequence = parseSequence(solution);
+                runSequence(sequence);
+                solution = orderLastCorners();
+                result += solution;
                 break;
         }
-        sequence = parseSequence(solution);
-        runSequence(sequence);
-        return solution;
+        return result;
 
     }
 
@@ -657,7 +677,7 @@ public final class Cubies {
         int index21 = getIndex(cubies, 21);
         int index29 = getIndex(cubies, 22);
         int index37 = getIndex(cubies, 37);
-        String finalSolutionLinear = "R L' F R L' U R L' B B L R' U L R' F L R' D D";
+        String finalSolutionLinear = " R L' F R L' U R L' B B L R' U L R' F L R' D D";
         String finalSolutionDiagonal = " L' D' U B B D U' D U' F' D' F D U' D U' B B D U' L D" ;
         if(index13 == 13 && index21 == 21 && index29 == 29 && index37 == 37) {
             System.out.println("CUBE SOLVED!");
@@ -702,31 +722,46 @@ public final class Cubies {
 
     public String optimizeSequence(String sequence) {
       String optimized = sequence
-              .replace(" U U U U", " ")
-              .replace(" F F F F", " ")
-              .replace(" R R R R", " ")
-              .replace(" B B B B", " ")
-              .replace(" L L L L", " ")
-              .replace(" D D D D", " ")
-              .replace(" U' U' U' U'", "")
-              .replace(" F' F' F' F'", "")
-              .replace(" R' R' R' R'", "")
-              .replace(" B' B' B' B'", "")
-              .replace(" L' L' L' L'", "")
-              .replace(" D' D' D' D'", "")
+              .replace(" U U U U ", " ")
+              .replace(" F F F F ", " ")
+              .replace(" R R R R ", " ")
+              .replace(" B B B B ", " ")
+              .replace(" L L L L ", " ")
+              .replace(" D D D D ", " ")
+              .replace(" U' U' U' U'", " ")
+              .replace(" U' U' U' U'", " ")
+              .replace(" F' F' F' F'", " ")
+              .replace(" R' R' R' R'", " ")
+              .replace(" B' B' B' B'", " ")
+              .replace(" L' L' L' L'", " ")
+              .replace(" D' D' D' D'", " ")
               .replace(" U' U ", " ")
               .replace(" F' F ", " ")
               .replace(" R' R ", " ")
               .replace(" B' B ", " ")
               .replace(" L' L ", " ")
               .replace(" D' D ", " ")
-              .replace(" U U'", "")
-              .replace(" F F'", "")
-              .replace(" R R'", "")
-              .replace(" B B'", "")
-              .replace(" L L'", "")
-              .replace(" D D'", "");
+              .replace(" U U'", " ")
+              .replace(" F F'", " ")
+              .replace(" R R'", " ")
+              .replace(" B B'", " ")
+              .replace(" L L'", " ")
+              .replace(" D D'", " ");
       return optimized;
+    }
+
+    //U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2
+
+    public String parseSequenceInitial(String sequence) {
+        String newSequence = "";
+        newSequence =  sequence
+                .replace("U2", "U U")
+                .replace("F2", "F F")
+                .replace("R2", "R R")
+                .replace("B2", "B B")
+                .replace("L2", "B B")
+                .replace("D2", "D D");
+        return newSequence;
     }
 
 
