@@ -1,4 +1,3 @@
-
 import peasy.*;
 import processing.core.*;
 
@@ -9,18 +8,23 @@ import java.util.List;
 public class Cube extends PApplet {
 
     int dim = 3;
+    int speed = 15;
     int index = 0;
     private PeasyCam cam;
     Box[] cube = new Box[dim*dim*dim];
-    String[] allMoves = {"F", "B", "U", "D", "L", "R"};
-    String sequence = "";
     int counter = 0;
     List<Movements> moves;
-    List<Movements> moves1;
-    List<Movements> moves3;
+    List<Movements> movesCube;
+    List<Movements> movesFirstLayer;
+    List<Movements> movesSecondLayer;
+    List<Movements> movesThirdLayerCorners;
+    List<Movements> movesThirdLayerCross;
     boolean disorder = false;
     boolean solve = false;
-    boolean solve3 = false;
+    boolean solveFirstLayer = false;
+    boolean solveSecondLayer = false;
+    boolean solveThirdLayerCorners = false;
+    boolean solveThirdLayerCross = false;
 
     Move moveU_CW;
     Move moveU_CCW;
@@ -39,10 +43,43 @@ public class Cube extends PApplet {
     String solveSequence = "";
     String solveCross = "";
     String solveCorners = "";
+    String solveLastCorners = "";
+    String orderLastCorners = "";
     String solveEdges = "";
+    String solveLastCross= "";
+    String orderLastCross = "";
 
     public static void main(String[] args) {
-        PApplet.main("Cube");
+        if (args.length >= 1 && args.length < 3){
+            try {
+                if (args.length == 1){
+                    Cubies.getInstance().parseSequence(args[0]);
+                } else {
+                    if (args[0].equals("-m")){
+                        Cubies.getInstance().parseSequence(args[1]);
+                        Cubies.getInstance().activatePrintMoves();
+                        Cubies.getInstance().setInitialSequence(args[1]);
+                    }
+                    else if (args[1].equals("-m")){
+                        Cubies.getInstance().parseSequence(args[0]);
+                        Cubies.getInstance().activatePrintMoves();
+                        Cubies.getInstance().setInitialSequence(args[0]);
+                    }
+                    else
+                        System.out.println("Error. Please check the arguments.\n" +
+                                "Usage example: javac -jar rubik.jar -m 'F F D D L L'");
+                    return;
+                }
+            } catch (Exception e) {
+                System.out.println("Error. Please check the arguments.\n" +
+                        "Usage example: javac -jar rubik.jar -m 'F F D D L L'");
+            }
+
+            PApplet.main("Cube");
+        } else {
+            System.out.println("Write a sequence as argument.\nAdd flag -m to print vector cube moves." +
+                    "\nUsage example: javac -jar rubik.jar -m 'F F D D L L'");
+        }
     }
 
     public void setup(){
@@ -76,23 +113,31 @@ public class Cube extends PApplet {
 
 
         Cubies.getInstance().initCube();
-        String sequence = " B B F R' L' R D F L";
+        //String sequence = "R L' F R L' U R L' B B L R' U L R' F L R' D D";
+        String sequence = Cubies.getInstance().getInitialSequence();
         moves = Cubies.getInstance().parseSequence(sequence);
         Cubies.getInstance().printCube();
         Cubies.getInstance().runSequence(moves);
-        System.out.println("-----------------MAKE CROSS-----------------");
+        Cubies.getInstance().counterMoves = 0;
         solveCross = Cubies.getInstance().makeCross();
-        //Cubies.getInstance().printCube();
-        System.out.println("-----------------SOLVER CORNERS-----------------");
         solveCorners = Cubies.getInstance().solveCorners();
-        System.out.println("-----------------SOLVER EDGES-----------------");
         solveEdges = Cubies.getInstance().solveEdges();
-        //Cubies.getInstance().printCube();
-        solveSequence = solveCross + solveCorners;
-        moves1 = Cubies.getInstance().parseSequence(solveSequence);
-        moves3 = Cubies.getInstance().parseSequence(solveEdges);
-        System.out.println("sequence firts layer: " + solveSequence);
-        System.out.println("sequence for solve edges: " + solveEdges);
+        orderLastCorners = Cubies.getInstance().orderLastCorners();
+        solveLastCorners = Cubies.getInstance().solveLastCorners();
+        orderLastCross = Cubies.getInstance().orderLastCross();
+        solveLastCross = Cubies.getInstance().solveLastCross();
+        solveSequence = Cubies.getInstance().optimizeSequence(solveCross + solveCorners + solveEdges +
+                orderLastCorners + solveLastCorners + orderLastCross + solveLastCross);
+        System.out.println("Cube solved in " + Cubies.getInstance().counterMoves + " moves!");
+        System.out.println("Solution:\n" + solveSequence + "\n");
+        movesCube = Cubies.getInstance().parseSequence(solveSequence);
+        movesFirstLayer = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(solveCross + solveCorners));
+        movesSecondLayer = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(solveEdges));
+        movesThirdLayerCorners = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(orderLastCorners + solveCorners));
+        movesThirdLayerCross = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(orderLastCross + solveLastCross));
+        System.out.println("Run initial sequence -> press 1\n" +
+                            "run solver -> press 2\nExit -> press 7\n" +
+                            "Find more controls on readme file");
     }
 
     public String getSolveSequence(){
@@ -151,7 +196,7 @@ public class Cube extends PApplet {
 
         if(disorder){
             move.update();
-            if(frameCount % 20 == 0) {
+            if(frameCount % speed == 0) {
                 if(move.finished()) {
                     if (counter < moves.size()) {
                         move(moves.get(counter));
@@ -165,10 +210,10 @@ public class Cube extends PApplet {
         }
         if(solve){
             move.update();
-            if(frameCount % 20 == 0) {
+            if(frameCount % speed == 0) {
                 if(move.finished()) {
-                    if (counter < moves1.size()) {
-                        move(moves1.get(counter));
+                    if (counter < movesCube.size()) {
+                        move(movesCube.get(counter));
                         counter++;
                     } else {
                         counter = 0;
@@ -177,16 +222,58 @@ public class Cube extends PApplet {
                 }
             }
         }
-        if(solve3){
+        if(solveFirstLayer && !solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
             move.update();
-            if(frameCount % 20 == 0) {
+            if(frameCount % speed == 0) {
                 if(move.finished()) {
-                    if (counter < moves3.size()) {
-                        move(moves3.get(counter));
+                    if (counter < movesFirstLayer.size()) {
+                        move(movesFirstLayer.get(counter));
                         counter++;
                     } else {
                         counter = 0;
-                        solve3 = false;
+                        solveFirstLayer = false;
+                    }
+                }
+            }
+        }
+        if(!solveFirstLayer && solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
+            move.update();
+            if(frameCount % speed == 0) {
+                if(move.finished()) {
+                    if (counter < movesSecondLayer.size()) {
+                        move(movesSecondLayer.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solveSecondLayer = false;
+                    }
+                }
+            }
+        }
+        if(!solveFirstLayer && !solveSecondLayer && solveThirdLayerCorners && !solveThirdLayerCross){
+            move.update();
+            if(frameCount % speed == 0) {
+                if(move.finished()) {
+                    if (counter < movesThirdLayerCorners.size()) {
+                        move(movesThirdLayerCorners.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solveThirdLayerCorners = false;
+                    }
+                }
+            }
+        }
+        if(!solveFirstLayer && !solveSecondLayer && !solveThirdLayerCorners && solveThirdLayerCross){
+            move.update();
+            if(frameCount % speed == 0) {
+                if(move.finished()) {
+                    if (counter < movesThirdLayerCross.size()) {
+                        move(movesThirdLayerCross.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solveThirdLayerCross = false;
                     }
                 }
             }
@@ -270,6 +357,8 @@ public class Cube extends PApplet {
 
     public void keyPressed() {
         switch (key){
+            case '7':
+                exit();
             case '1':
                 disorder = true;
                 move = new Move(0,0,0,0 );
@@ -279,7 +368,19 @@ public class Cube extends PApplet {
                 move = new Move(0,0,0,0 );
                 break;
             case '3':
-                solve3 = true;
+                solveFirstLayer = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '4':
+                solveSecondLayer = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '5':
+                solveThirdLayerCorners = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '6':
+                solveThirdLayerCross = true;
                 move = new Move(0,0,0,0 );
                 break;
             case 'q':
@@ -317,6 +418,8 @@ public class Cube extends PApplet {
                 break;
             case 'v':
                 move(Movements.L_CCW);
+                break;
+            default:
                 break;
         }
         if(move != null) {
@@ -480,7 +583,7 @@ public class Cube extends PApplet {
 
         void update() {
             if(animating) {
-                angle += dir * 0.1;
+                angle += dir * speed * 0.01;
                 if (abs(angle) > HALF_PI) {
                     angle = 0;
                     animating = false;

@@ -1,34 +1,12 @@
-Cube class - cube draw and prgram run
-    Methods:
-        settings - initial cub parameters to draw
-        setup - cam start to use with the mouse
-        turn X, Y, Z - turn all mini cubes of one face usin 2D matrix
-        draw - draw and update draw
-        move - all possible cub moves
-        keypressed - move with keyboar controls written down
-     Subclases: Box, Face, Move
-
-     Box - all mini cubes are box clases
-     Face - Colors on big cub faces
-     Move - colors anc big cub moves
-
-Class Cubies - Solution algorithm
-    Movement Methods:
-        turnCW - clock wise turn of one cube face
-        turnCCW - counter clock wise turn of one cub face
-
-    Solution Methods:
-        1)makeCross - use the curren big cube position and make a cross of on the UP face
-        2)solveCorners - solve the UP cube face ordering the corners after makeCross method
-        3)solve edges - solve the edges of the secont cub layer
-        -------------------------------------------------------------
-        3)solveFinalCorners - solve the corners of last cub layer(Down)
-        4)solveFinalCross - solve the last cross
-        ------------possible variation--------------------------
-        4)solveFinalCross - solve the last cross
-        3)solveFinalCorners - solve the corners of last cub layer(Down)
-
 Controls
+
+Run initial sequence -> 1
+Run solver -> 2
+Run solver first layer -> 3
+Run solver second layer-> 4
+Run solver third layer corners-> 5
+Run solver third layer cross-> 6
+Exit-> 7
 
 UP -> q, r
 FRONT -> a, s
@@ -37,7 +15,8 @@ BACK -> e, r
 DOWN -> d, f
 LEFT -> c, v
 
-Automatic moves -> 1
+
+Vector's faces:
 
 UP
 0  1  2
@@ -59,12 +38,12 @@ BACK
 31  x 27
 30 29 28
 
-DOWN
+LEFT
 32 33 34
 39  x 35
 38 37 36
 
-LEFT
+DOWN
 40 41 42
 47  x 43
 46 45 44

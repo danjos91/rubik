@@ -1,18 +1,8 @@
 import java.util.Arrays;
 import java.util.List;
 
-public class Faces {//"FRBL"
-    /*UP(1, 1 ,1 ,1),
-    FRONT(1, 4 ,3 ,2),
-    RIGHT(2, 4 ,2 ,2),
-    BACK(3, 4 ,1 ,2),
-    DOWN(4, 4 ,4 ,2),
-    LEFT(3, 3 ,3 ,3);*/
+public class Faces {
 
-    Faces neighborDown;
-    Faces neighborRight;
-    Faces neighborUp;
-    Faces neighborLeft;
     String name = "";
     public final int neighborSideDown;
     public final int neighborSideRight;
@@ -81,7 +71,7 @@ public class Faces {//"FRBL"
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorUp);
         }
         Cubies.getInstance().updateCubies();
-        if (Cubies.getInstance().print) {
+        if(Cubies.getInstance().getPrintMoves()) {
             System.out.println("Movement :" + name.toUpperCase() + "'");
             Cubies.getInstance().printCube();
         }
@@ -128,7 +118,7 @@ public class Faces {//"FRBL"
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorDown);
         }
         Cubies.getInstance().updateCubies();
-        if (Cubies.getInstance().print) {
+        if(Cubies.getInstance().getPrintMoves()) {
             System.out.println("Movement :" + name.toUpperCase());
             Cubies.getInstance().printCube();
         }
@@ -160,6 +150,5 @@ public class Faces {//"FRBL"
     public Vector getVectorFace() {
         return vectorFace;
     }
-
 }
 
