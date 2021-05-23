@@ -71,7 +71,7 @@ public class Faces {
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorUp);
         }
         Cubies.getInstance().updateCubies();
-        if(Cubies.getInstance().getPrintMoves()) {
+        if(Cubies.getInstance().getPrintOn()) {
             System.out.println("Movement :" + name.toUpperCase() + "'");
             Cubies.getInstance().printCube();
         }
@@ -118,7 +118,7 @@ public class Faces {
             Cubies.getInstance().left.setVectorFace(neighborSideLeft, subNeighborVectorDown);
         }
         Cubies.getInstance().updateCubies();
-        if(Cubies.getInstance().getPrintMoves()) {
+        if(Cubies.getInstance().getPrintOn()) {
             System.out.println("Movement :" + name.toUpperCase());
             Cubies.getInstance().printCube();
         }

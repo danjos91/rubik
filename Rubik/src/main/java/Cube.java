@@ -54,6 +54,7 @@ public class Cube extends PApplet {
             try {
                 if (args.length == 1){
                     Cubies.getInstance().parseSequence(args[0]);
+                    Cubies.getInstance().setInitialSequence(args[0]);
                 } else {
                     if (args[0].equals("-m")){
                         Cubies.getInstance().parseSequence(args[1]);
@@ -65,20 +66,24 @@ public class Cube extends PApplet {
                         Cubies.getInstance().activatePrintMoves();
                         Cubies.getInstance().setInitialSequence(args[0]);
                     }
-                    else
+                    else {
                         System.out.println("Error. Please check the arguments.\n" +
-                                "Usage example: javac -jar rubik.jar -m 'F F D D L L'");
+                                "Usage example: Arguments example: -m 'F F D D L L'");
+                        return;
+                    }
+
+                    PApplet.main("Cube");
                     return;
                 }
             } catch (Exception e) {
                 System.out.println("Error. Please check the arguments.\n" +
-                        "Usage example: javac -jar rubik.jar -m 'F F D D L L'");
+                        "Usage example: Arguments example: -m 'F F D D L L'");
             }
 
-            PApplet.main("Cube");
+
         } else {
             System.out.println("Write a sequence as argument.\nAdd flag -m to print vector cube moves." +
-                    "\nUsage example: javac -jar rubik.jar -m 'F F D D L L'");
+                    "\nArguments example: -m 'F F D D L L'");
         }
     }
 
@@ -113,12 +118,11 @@ public class Cube extends PApplet {
 
 
         Cubies.getInstance().initCube();
-        //String sequence = "R L' F R L' U R L' B B L R' U L R' F L R' D D";
         String sequence = Cubies.getInstance().getInitialSequence();
+        System.out.println("Initial Cube State");
         moves = Cubies.getInstance().parseSequence(sequence);
         Cubies.getInstance().printCube();
         Cubies.getInstance().runSequence(moves);
-        Cubies.getInstance().counterMoves = 0;
         solveCross = Cubies.getInstance().makeCross();
         solveCorners = Cubies.getInstance().solveCorners();
         solveEdges = Cubies.getInstance().solveEdges();
@@ -128,7 +132,13 @@ public class Cube extends PApplet {
         solveLastCross = Cubies.getInstance().solveLastCross();
         solveSequence = Cubies.getInstance().optimizeSequence(solveCross + solveCorners + solveEdges +
                 orderLastCorners + solveLastCorners + orderLastCross + solveLastCross);
+        Cubies.getInstance().counterMoves = 0;
+        if(Cubies.getInstance().getPrintMoves()) {
+            Cubies.getInstance().printOn();
+        }
+        Cubies.getInstance().runSequence(Cubies.getInstance().parseSequence(solveSequence));
         System.out.println("Cube solved in " + Cubies.getInstance().counterMoves + " moves!");
+        System.out.println("Initial sequence: " + sequence);
         System.out.println("Solution:\n" + solveSequence + "\n");
         movesCube = Cubies.getInstance().parseSequence(solveSequence);
         movesFirstLayer = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(solveCross + solveCorners));

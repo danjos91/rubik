@@ -15,6 +15,16 @@ public final class Cubies {
         return instance;
     }
 
+    private boolean printOn = false;
+
+    public void printOn() {
+        printOn = true;
+    }
+
+    public boolean getPrintOn(){
+        return printOn;
+    }
+
     public void activatePrintMoves(){
         printMoves = true;
     }
@@ -185,7 +195,6 @@ public final class Cubies {
         for (int edge : cross) {
             index = getIndex(cubies, edge);
             solution = makeCross(index);
-            System.out.println("For EDGE " + edge + " in index " + index + "the solution is " + solution + " U'");
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
@@ -279,7 +288,6 @@ public final class Cubies {
         for (int corner : corners) {
             index = getIndex(cubies, corner);
             solution = solveCorners(index);
-            System.out.println("For CORNER " + corner + " in index " + index + " the solution is " + solution + " U'");
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
@@ -404,8 +412,6 @@ public final class Cubies {
             }
             solution = solveEdges(index);
             sequence = parseSequence(solution);
-            System.out.println("For EDGE" + edge + " in index " + index + " the solution is " + solution);
-            System.out.println("OrderFaces  " + orderFaces[1]);
             runSequence(sequence);
             orderFaces = orderY.get((i++)%4);
             result += solution;// result is for graphics
@@ -497,7 +503,6 @@ public final class Cubies {
         String changeTwoCornerDiagonalPlaces = " R' D' R F D' D' F' R' D R D'";
         int index;
         index = getIndex(cubies, 14);
-        System.out.println("cubies 14 is in index " + index);
         switch (index) {
             case 12:
             case 22:
@@ -515,12 +520,10 @@ public final class Cubies {
                 solution = " D";
                 break;
         }
-        System.out.println("solution " + solution);
         result = solution;
         sequence = parseSequence(solution);
         runSequence(sequence);
         index = getIndex(cubies, 12);
-        System.out.println("cubies 12 is in index " + index);
         switch (index) {
             case 30:
             case 44:
@@ -533,12 +536,10 @@ public final class Cubies {
                 solution = changeTwoCornerDiagonalPlaces;
                 break;
         }
-        System.out.println("solution " + solution);
         sequence = parseSequence(solution);
         runSequence(sequence);
         result += solution;
         index = getIndex(cubies, 20);
-        System.out.println("cubies 20 is in index " + index);
         switch (index) {
             case 28:
             case 38:
@@ -546,7 +547,6 @@ public final class Cubies {
                 solution = " D D" + changeTwoCornerPlaces + " D D";
                 break;
         }//Corners ordered
-        System.out.println("solution " + solution);
         sequence = parseSequence(solution);
         runSequence(sequence);
         result += solution;
