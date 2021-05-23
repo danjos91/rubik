@@ -355,8 +355,9 @@ public final class Cubies {
     public String solveEdges() {
         String result = "";
         String solution;
+        int correcValue = 0;
         List<Movements> sequence;
-        int[] edges = {11, 19, 27, 43};
+        int[] edges = {11, 19, 27, 35};
         List<String[]> orderY = new ArrayList<String[]>();
         String[] orderFaces1 = {" U", " R", " B", " L", " F", " D"};
         String[] orderFaces2 = {" U", " B", " L", " F", " R", " D"};
@@ -368,14 +369,41 @@ public final class Cubies {
         int index;
         int i = 1;
         for (int edge : edges) {
-            index = getIndex(cubies, edge);
+            /*if (orderFaces[1].equals(" R")){
+                right.rotateCCW();
+            } else if(orderFaces[1].equals(" B")){
+                back.rotateCW();
+                back.rotateCW();
+            } else if(orderFaces[1].equals(" L")){
+                down.rotateCW();
+            }*/
+            index = getIndex(cubies, edge) + correcValue;
+            if (orderFaces[1].equals(" R")){
+                if (index > 40)
+                    index = ((index - 40) - 2) % 8 + 40;
+                else
+                    index = ((index - 8) - 8) % 32 + 8;
+            } else if(orderFaces[1].equals(" B")){
+                if (index > 40)
+                    index = ((index - 40) + 4) % 8 + 40;
+                else
+                    index = ((index + 8) + 16) % 32 + 8;
+            } else if(orderFaces[1].equals(" L")){
+                if (index > 40)
+                    index = ((index - 40) + 2) % 8 + 40;
+                else
+                    index = ((index - 8) + 8) % 32 + 8;
+            }
             solution = solveEdges(index);
             sequence = parseSequence(solution);
-            System.out.println("For EDGE" + edge + " in index " + index + " the solution is " + solution + " U'");
+            System.out.println("For EDGE" + edge + " in index " + index + " the solution is " + solution);
+            System.out.println("OrderFaces  " + orderFaces[1]);
             runSequence(sequence);
             orderFaces = orderY.get((i++)%4);
+            //correcValue = 2;
             result += solution;// result is for graphics
         }
+        correcValue = 0;
         return result;
     }
 
@@ -402,7 +430,7 @@ public final class Cubies {
 
         switch (index) {
             case 13:
-                solution = down + "'" + solveEdges(37);
+                solution = down + minus + solveEdges(37);
                 break;
             case 15:
                 solution = sequenceEdgeBetweenFaces(left, front) + down + down + solveEdges(37);
@@ -426,10 +454,10 @@ public final class Cubies {
                 solution = sequenceEdgeBetweenFaces(right, back) + solveEdges(37);
                 break;
             case 41:
-                solution = down + minus + solveEdges(45);
+                solution = down + down + solveEdges(45);
                 break;
             case 43:
-                solution = down + minus + solveEdges(45);
+                solution = down + solveEdges(45);
                 break;
             case 45://main sequence mirror
                 solution = front + down + minus + front + minus + down +

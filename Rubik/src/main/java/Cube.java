@@ -76,7 +76,7 @@ public class Cube extends PApplet {
 
 
         Cubies.getInstance().initCube();
-        String sequence = " B B F R' L'";
+        String sequence = " B B F R' L' R D F L";
         moves = Cubies.getInstance().parseSequence(sequence);
         Cubies.getInstance().printCube();
         Cubies.getInstance().runSequence(moves);
