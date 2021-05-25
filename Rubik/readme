@@ -1,20 +1,21 @@
-Controls
+	Controls
+____________________________________
 
-Run initial sequence -> 1
-Run solver -> 2
-Run solver first layer -> 3
-Run solver second layer-> 4
-Run solver third layer corners-> 5
-Run solver third layer cross-> 6
+Run initial sequence	-> 1
+Run solver		-> 2
+Run solver first layer 	-> 3
+Run solver second layer	-> 4
+Run solver third layer corners	-> 5
+Run solver third layer cross	-> 6
 Exit-> 7
-
-UP -> q, r
-FRONT -> a, s
-RIGHT -> z, x
-BACK -> e, r
-DOWN -> d, f
-LEFT -> c, v
-
+	    -  +
+UP	->  e, r
+FRONT 	->  d, f
+RIGHT 	->  g, h
+BACK 	->  j, k
+DOWN 	->  x, c
+LEFT 	->  a, s
+____________________________________
 
 Vector's faces:
 

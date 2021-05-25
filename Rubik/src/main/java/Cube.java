@@ -1,27 +1,27 @@
 import peasy.*;
 import processing.core.*;
-
-
 import java.awt.*;
 import java.util.List;
 
 public class Cube extends PApplet {
 
     int dim = 3;
-    int speed = 10;
+    int speed = 9;
     int index = 0;
     private PeasyCam cam;
     Box[] cube = new Box[dim*dim*dim];
     int counter = 0;
     List<Movements> moves;
     List<Movements> movesCube;
-    List<Movements> movesFirstLayer;
+    List<Movements> movesFirstLayerCross;
+    List<Movements> movesFirstLayerCorners;
     List<Movements> movesSecondLayer;
     List<Movements> movesThirdLayerCorners;
     List<Movements> movesThirdLayerCross;
     boolean disorder = false;
     boolean solve = false;
-    boolean solveFirstLayer = false;
+    boolean solveFirstLayerCross = false;
+    boolean solveFirstLayerCorners = false;
     boolean solveSecondLayer = false;
     boolean solveThirdLayerCorners = false;
     boolean solveThirdLayerCross = false;
@@ -49,7 +49,7 @@ public class Cube extends PApplet {
     String solveLastCross= "";
     String orderLastCross = "";
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         if (args.length >= 1 && args.length < 3){
             try {
                 if (args.length == 1){
@@ -68,23 +68,21 @@ public class Cube extends PApplet {
                     }
                     else {
                         System.out.println("Error. Please check the arguments.\n" +
-                                "Usage example: Arguments example: -m 'F F D D L L'");
+                                "Usage example: Arguments example: -m \"F F D D L L\"");
                         return;
                     }
                 }
                 PApplet.main("Cube");
             } catch (Exception e) {
                 System.out.println("Error. Please check the arguments.\n" +
-                        "Usage example: Arguments example: -m 'F F D D L L'\n" + e.getMessage());
+                        "Usage example: Arguments example: -m \"F F D D L L\"\n" + e.getMessage());
                 e.printStackTrace();
             }
-
-
         } else {
             System.out.println("Write a sequence as argument.\nAdd flag -m to print vector cube moves." +
-                    "\nArguments example: -m 'F F D D L L'");
+                    "\nArguments example: -m \"F F D D L L\"");
         }
-    }
+    }*/
 
     public void setup(){
         cam = new PeasyCam(this, 600);
@@ -119,34 +117,62 @@ public class Cube extends PApplet {
         Cubies.getInstance().initCube();
         String sequence = Cubies.getInstance().getInitialSequence();
         System.out.println("Initial Cube State");
-        moves = Cubies.getInstance().parseSequence(sequence);
+        moves = getMoves(parseSequence(optimize(sequence)));
         Cubies.getInstance().printCube();
         Cubies.getInstance().runSequence(moves);
-        solveCross = Cubies.getInstance().makeCross();
-        solveCorners = Cubies.getInstance().solveCorners();
-        solveEdges = Cubies.getInstance().solveEdges();
-        orderLastCorners = Cubies.getInstance().orderLastCorners();
-        solveLastCorners = Cubies.getInstance().solveLastCorners();
-        orderLastCross = Cubies.getInstance().orderLastCross();
-        solveLastCross = Cubies.getInstance().solveLastCross();
-        solveSequence = Cubies.getInstance().optimizeSequence(solveCross + solveCorners + solveEdges +
+        System.out.println("Initial sequence: " + optimize(sequence));
+        System.out.println("Initial sequences have " + countSteps(optimize(sequence)) + " moves!");
+        solveCross = optimize(Cubies.getInstance().makeCross());
+        solveCorners = optimize(Cubies.getInstance().solveCorners());
+        solveEdges = optimize(Cubies.getInstance().solveEdges());
+        orderLastCorners = optimize(Cubies.getInstance().orderLastCorners());
+        solveLastCorners = optimize(Cubies.getInstance().solveLastCorners());
+        orderLastCross = optimize(Cubies.getInstance().orderLastCross());
+        solveLastCross = optimize(Cubies.getInstance().solveLastCross());
+        solveSequence = optimize(solveCross + solveCorners + solveEdges +
                 orderLastCorners + solveLastCorners + orderLastCross + solveLastCross);
         Cubies.getInstance().counterMoves = 0;
         if(Cubies.getInstance().getPrintMoves()) {
             Cubies.getInstance().printOn();
+            Cubies.getInstance().resetCube();
+            System.out.println("Disorder initial sequence....");
+            Cubies.getInstance().runSequence(moves);
+            System.out.println("Solving sequence....");
+            Cubies.getInstance().runSequence(getMoves(parseSequence(optimize(solveSequence))));
         }
-        Cubies.getInstance().runSequence(Cubies.getInstance().parseSequence(solveSequence));
-        System.out.println("Cube solved in " + Cubies.getInstance().counterMoves + " moves!");
-        System.out.println("Initial sequence: " + sequence);
+        System.out.println("Cube solved in " + countSteps(solveSequence) + " moves!");
         System.out.println("Solution:\n" + solveSequence + "\n");
-        movesCube = Cubies.getInstance().parseSequence(solveSequence);
-        movesFirstLayer = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(solveCross + solveCorners));
-        movesSecondLayer = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(solveEdges));
-        movesThirdLayerCorners = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(orderLastCorners + solveCorners));
-        movesThirdLayerCross = Cubies.getInstance().parseSequence(Cubies.getInstance().optimizeSequence(orderLastCross + solveLastCross));
+        movesCube = getMoves(parseSequence(solveSequence));
+        movesFirstLayerCross = getMoves(parseSequence(solveCross));
+        movesFirstLayerCorners = getMoves(parseSequence(solveCorners));
+        movesSecondLayer = getMoves(parseSequence(solveEdges));
+        movesThirdLayerCorners = getMoves(parseSequence(orderLastCorners + solveLastCorners));
+        movesThirdLayerCross = getMoves(parseSequence(orderLastCross + solveLastCross));
         System.out.println("Run initial sequence -> press 1\n" +
                             "run solver -> press 2\nExit -> press 7\n" +
                             "Find more controls on readme file");
+    }
+
+    public String optimize(String sequence){
+        return Cubies.getInstance().optimizeSequence(sequence);
+    }
+
+    public List<Movements> getMoves(String sequence) {
+        return  Cubies.getInstance().parseSequence(sequence);
+    }
+
+    public String parseSequence(String sequence) {
+        return Cubies.getInstance().parseSequenceInitial(sequence);
+    }
+
+    public int countSteps(String solution){
+        String sol = solution.trim();
+        int count = 0;
+        for(int i = 0; i < sol.length(); i++) {
+            if (sol.charAt(i) == ' ')
+                count++;
+        }
+        return count + 1;
     }
 
     void turnY(int index, int dir) {
@@ -224,21 +250,35 @@ public class Cube extends PApplet {
                 }
             }
         }
-        if(solveFirstLayer && !solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
+        if(solveFirstLayerCross && !solveFirstLayerCorners && !solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
             move.update();
             if(frameCount % speed == 0) {
                 if(move.finished()) {
-                    if (counter < movesFirstLayer.size()) {
-                        move(movesFirstLayer.get(counter));
+                    if (counter < movesFirstLayerCross.size()) {
+                        move(movesFirstLayerCross.get(counter));
                         counter++;
                     } else {
                         counter = 0;
-                        solveFirstLayer = false;
+                        solveFirstLayerCross = false;
                     }
                 }
             }
         }
-        if(!solveFirstLayer && solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
+        if(!solveFirstLayerCross && solveFirstLayerCorners  && !solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
+            move.update();
+            if(frameCount % speed == 0) {
+                if(move.finished()) {
+                    if (counter < movesFirstLayerCorners.size()) {
+                        move(movesFirstLayerCorners.get(counter));
+                        counter++;
+                    } else {
+                        counter = 0;
+                        solveFirstLayerCorners = false;
+                    }
+                }
+            }
+        }
+        if(!solveFirstLayerCross && !solveFirstLayerCorners && solveSecondLayer && !solveThirdLayerCorners && !solveThirdLayerCross){
             move.update();
             if(frameCount % speed == 0) {
                 if(move.finished()) {
@@ -252,7 +292,7 @@ public class Cube extends PApplet {
                 }
             }
         }
-        if(!solveFirstLayer && !solveSecondLayer && solveThirdLayerCorners && !solveThirdLayerCross){
+        if(!solveFirstLayerCross && !solveFirstLayerCorners && !solveSecondLayer && solveThirdLayerCorners && !solveThirdLayerCross){
             move.update();
             if(frameCount % speed == 0) {
                 if(move.finished()) {
@@ -266,7 +306,7 @@ public class Cube extends PApplet {
                 }
             }
         }
-        if(!solveFirstLayer && !solveSecondLayer && !solveThirdLayerCorners && solveThirdLayerCross){
+        if(!solveFirstLayerCross && !solveFirstLayerCorners && !solveSecondLayer && !solveThirdLayerCorners && solveThirdLayerCross){
             move.update();
             if(frameCount % speed == 0) {
                 if(move.finished()) {
@@ -359,66 +399,79 @@ public class Cube extends PApplet {
 
     public void keyPressed() {
         switch (key){
-            case '7':
+            case '8':
+                dispose();
                 exit();
+                break;
             case '1':
+                System.out.println("\nApplying initial sequence...");
                 disorder = true;
                 move = new Move(0,0,0,0 );
                 break;
             case '2':
+                System.out.println("\nSolving cube...");
                 solve = true;
                 move = new Move(0,0,0,0 );
                 break;
             case '3':
-                solveFirstLayer = true;
+                System.out.println("\nSolving initial cross...");
+                solveFirstLayerCross = true;
                 move = new Move(0,0,0,0 );
                 break;
             case '4':
-                solveSecondLayer = true;
+                System.out.println("\nSolving corners...");
+                solveFirstLayerCorners = true;
                 move = new Move(0,0,0,0 );
                 break;
             case '5':
-                solveThirdLayerCorners = true;
+                System.out.println("\nSolving edges on second layer...");
+                solveSecondLayer = true;
                 move = new Move(0,0,0,0 );
                 break;
             case '6':
+                System.out.println("\nSolving last corners...");
+                solveThirdLayerCorners = true;
+                move = new Move(0,0,0,0 );
+                break;
+            case '7':
+                System.out.println("\nSolving last cross...");
                 solveThirdLayerCross = true;
                 move = new Move(0,0,0,0 );
                 break;
-            case 'q':
+            case 'r':
                 move(Movements.U_CW);
                 break;
-            case 'w':
+            case 'e':
                 move(Movements.U_CCW);
                 break;
-            case 'a':
+            case 'f':
                 move(Movements.F_CW);
                 break;
-            case 's':
+            case 'd':
                 move(Movements.F_CCW);
                 break;
-            case 'z':
+            case 'h':
                 move(Movements.R_CW);
                 break;
-            case 'x':
+            case 'g':
                 move(Movements.R_CCW);
                 break;
-            case 'e':
+            case 'k':
                 move(Movements.B_CW);
                 break;
-            case 'r':
+            case 'j':
                 move(Movements.B_CCW);
                 break;
-            case 'd':
+            case 'v':
                 move(Movements.D_CW);
                 break;
-            case 'f':
+            case 'c':
                 move(Movements.D_CCW);
                 break;
-            case 'c':
+            case 's':
                 move(Movements.L_CW);
                 break;
-            case 'v':
+            case 'a':
                 move(Movements.L_CCW);
                 break;
             default:

@@ -54,9 +54,7 @@ public final class Cubies {
         back.setVectorFace(new Vector(24,25,26,27,28,29,30,31));
         left.setVectorFace(new Vector(32,33,34,35,36,37,38,39));
         down.setVectorFace(new Vector(40,41,42,43,44,45,46,47));
-
     }
-
 
     public int[] cubies  = new int[] {
             0, 1, 2, 3, 4, 5, 6, 7,
@@ -66,6 +64,17 @@ public final class Cubies {
             32, 33, 34, 35, 36, 37, 38, 39,
             40, 41, 42, 43, 44, 45, 46, 47
     };
+
+    public void resetCube(){
+        cubies = new int[] {
+                0, 1, 2, 3, 4, 5, 6, 7,
+                8, 9, 10, 11, 12, 13, 14, 15,
+                16, 17, 18, 19, 20, 21, 22, 23,
+                24, 25, 26, 27, 28, 29, 30, 31,
+                32, 33, 34, 35, 36, 37, 38, 39,
+                40, 41, 42, 43, 44, 45, 46, 47
+        };
+    }
 
     public void updateCubies() {
         int i;
@@ -193,10 +202,20 @@ public final class Cubies {
         String result = "";
         String solution = "";
         int index;
+        int indexOne = getIndex(cubies, 1);
+        int indexThree = getIndex(cubies, 3);
+        int indesxFive = getIndex(cubies, 5);
+        int indexeven = getIndex(cubies, 7);
+        String turnCubiesCrossLinear = " R' L F R' L D R' L B B L' R D L' R F L' R U U";
+        if (indexOne == 25 && indexThree == 17 && indesxFive == 9 && indexeven == 33) {
+            solution = turnCubiesCrossLinear;
+            result = solution;
+            sequence = parseSequence(solution);
+            runSequence(sequence);
+        }
         for (int edge : cross) {
             index = getIndex(cubies, edge);
             solution = makeCross(index);
-            //System.out.println("for edge " + edge + " in index " + index + " solution is " + solution);
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
@@ -293,7 +312,6 @@ public final class Cubies {
             sequence = parseSequence(solution);
             runSequence(sequence);
             up.rotateCCW();
-            //System.out.println("for corner " + corner + " in index " + index + " solution is " + solution);
             result += solution + " U'";
         }
         return result;
@@ -336,7 +354,7 @@ public final class Cubies {
                 solution = " D D" + solveCorners(38);
                 break;
             case 24:
-                solution = " B' D' B D D" + solveCorners(46);
+                solution = " B' D' B D D" + solveCorners(38);
                 break;
             case 26:
                 solution = " B D B' D'" + solveCorners(28);
@@ -396,11 +414,21 @@ public final class Cubies {
         int i = 1;
         for (int edge : edges) {
             index = getIndex(cubies, edge);
+            solution = "";
             if (orderFaces[1].equals(" R")){
-                if (index > 40)
+                if (index > 40){
+                    if (index == 41){
+                        index = 47;
+                    } else {
                     index = ((index - 40) - 2) % 8 + 40;
-                else
+                    }
+                } else {
+                    if (index == 13){
+                        index = 37;
+                    } else {
                     index = ((index - 8) - 8) % 32 + 8;
+                    }
+                }
             } else if(orderFaces[1].equals(" B")){
                 if (index > 40)
                     index = ((index - 40) + 4) % 8 + 40;
@@ -413,12 +441,14 @@ public final class Cubies {
                     index = ((index - 8) + 8) % 32 + 8;
             }
             solution = solveEdges(index);
-            System.out.println("For edge " + edge + " with index " + index + " solution is " + solution);
             sequence = parseSequence(solution);
             runSequence(sequence);
             orderFaces = orderY.get((i++)%4);
-            result += solution;// result is for graphics
+            result += solution;
         }
+        if (getIndex(cubies,11) != 11 || getIndex(cubies, 19) != 19 ||
+                getIndex(cubies, 27) != 27 || getIndex(cubies, 35) != 35)
+            throw new OrderCubiesException("Error in solveEdges");
         return result;
     }
 
@@ -474,7 +504,7 @@ public final class Cubies {
             case 43:
                 solution = down + solveEdges(45);
                 break;
-            case 45://main sequence mirror
+            case 45:
                 solution = front + down + minus + front + minus + down +
                         minus + right + minus + down + right;
                 break;
@@ -484,7 +514,7 @@ public final class Cubies {
             case 35:
                 solution = sequenceEdgeBetweenFaces(left, front) + down + solveEdges(45);
                 break;
-            case 37://main sequence
+            case 37:
                 solution = right + minus + down + right + down + front +
                         down + minus + front + minus;
                 break;
@@ -499,18 +529,17 @@ public final class Cubies {
 
     public String orderLastCorners()
     {
-        List<Movements>  sequence = null;
-        String result = "";
+        List<Movements>  sequence;
+        String result;
         String solution = "";
         String changeTwoCornerPlaces = " R' D' R F D F' R' D R D D";
-        //String changeTwoCornerDiagonalPlaces = " R' D' R F D' D' F' R' D R D'";
         int index;
         index = getIndex(cubies, 14);
         switch (index) {
             case 12:
             case 22:
             case 42:
-                solution = "D'";
+                solution = " D'";
                 break;
             case 30:
             case 44:
@@ -527,86 +556,139 @@ public final class Cubies {
         sequence = parseSequence(solution);
         runSequence(sequence);
         index = getIndex(cubies, 12);
+        while(index != 12 && index != 42 && index != 22) {
+            switch (index) {
+                case 30:
+                case 44:
+                case 20:
+                    solution = " D'" + changeTwoCornerPlaces + " D";
+                    break;
+                case 28:
+                case 38:
+                case 46:
+                    solution = " D D" + changeTwoCornerPlaces + " D D";
+                    break;
+            }
+            sequence = parseSequence(solution);
+            runSequence(sequence);
+            result += solution;
+            index = getIndex(cubies, 12);
+        }
+        index = getIndex(cubies, 30);
         switch (index) {
-            case 30:
-            case 44:
-            case 20:
-                solution = " D'" + changeTwoCornerPlaces + " D";
-                break;
             case 28:
             case 38:
             case 46:
                 solution = " D D" + changeTwoCornerPlaces + " D D";
-                solution += " D'" + changeTwoCornerPlaces + " D";
+                result += solution;
+                sequence = parseSequence(solution);
+                runSequence(sequence);
                 break;
         }
-        sequence = parseSequence(solution);
-        runSequence(sequence);
-        result += solution;
-        index = getIndex(cubies, 20);
-        switch (index) {
-            case 28:
-            case 38:
-            case 46:
-                solution = " D D" + changeTwoCornerPlaces + " D D";
-                break;
-        }//Corners ordered
-        sequence = parseSequence(solution);
-        runSequence(sequence);
-        result += solution;
         return result;
     }
 
     public String solveLastCorners() {
         int index;
-        List<Movements>  sequence = null;
-        String solution = "";
+        int[] edges = {40, 42, 44, 46};
+        for (int edge : edges) {
+            switch (edge) {
+                case 40:
+                    index = getIndex(cubies, edge);
+                    if (index != 40 && index != 36 && index != 14) {
+                        throw new OrderCubiesException("Wrong corner order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 42:
+                    index = getIndex(cubies, edge);
+                    if (index != 42 && index != 12 && index != 22) {
+                        throw new OrderCubiesException("Wrong corner order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 44:
+                    index = getIndex(cubies, edge);
+                    if (index != 44 && index != 30 && index != 20){
+                        throw new OrderCubiesException("Wrong corner order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 46:
+                    index = getIndex(cubies, edge);
+                    if (index != 46 && index != 28 && index != 38) {
+                        throw new OrderCubiesException("Wrong corner order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+            }
+        }
+        List<Movements>  sequence;
+        String solution;
         String result = "";
         String turnTwoFrontCorners = " L' U L F U F' D' F U' F' L' U' L D";
-
-        index = getIndex(cubies, 14);
-        if (index == 14) {
-            index = getIndex(cubies, 12);
-            if (index == 12) {
-                index = getIndex(cubies, 20);
-                if (index != 20) {
-                    solution = " D D" + turnTwoFrontCorners + " D D";
+        String rotateCubie = " L D L' D L D D L' D D";
+        while (getIndex(cubies,14) != 14 || getIndex(cubies, 12) != 12) {
+            index = getIndex(cubies, 14);
+            switch (index) {
+                case 14:
+                    if (getIndex(cubies, 38) == 38) {
+                        solution = " D'" + turnTwoFrontCorners  + " D";
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    } else if (getIndex(cubies, 12) == 12){
+                        solution = " D D" + turnTwoFrontCorners  + " D D";
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    } else {
+                        solution = " D" + rotateCubie + " D'";
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    }
+                    break;
+                case 40:
+                    if (getIndex(cubies, 12) == 42) {
+                        solution = turnTwoFrontCorners + turnTwoFrontCorners;
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    } else {
+                        solution = rotateCubie;
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    }
+                    break;
+                case 36:
+                    if (getIndex(cubies, 12) == 22) {
+                        solution = turnTwoFrontCorners;
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    } else {
+                        solution = rotateCubie;
+                        result += solution;
+                        sequence = parseSequence(solution);
+                        runSequence(sequence);
+                    }
+                    break;
+            }
+        }
+        while (getIndex(cubies,30) != 30) {
+            index = getIndex(cubies, 30);
+            switch (index) {
+                case 44:
+                    solution = " D D " + turnTwoFrontCorners + turnTwoFrontCorners + " D D";
                     result += solution;
                     sequence = parseSequence(solution);
                     runSequence(sequence);
-                    result += solveLastCorners();
-                }
-                return result;
-            } else if (index == 42){
-                solution = " D'" + turnTwoFrontCorners + " D";
-                result = solution;
-                sequence = parseSequence(solution);
-                runSequence(sequence);
-                result += solveLastCorners();
-
-            } else if (index == 22){
-                solution = " D'" + turnTwoFrontCorners + turnTwoFrontCorners + " D";
-                sequence = parseSequence(solution);
-                runSequence(sequence);
-                result = solution + solveLastCorners();
+                    break;
+                case 20:
+                    solution = " D D " + turnTwoFrontCorners + " D D";
+                    result += solution;
+                    sequence = parseSequence(solution);
+                    runSequence(sequence);
+                    break;
             }
-        } else {
-            if (index == 40 && getIndex(cubies, 12) == 42) {
-                solution = turnTwoFrontCorners + turnTwoFrontCorners;//12 and 14 on right site
-            } else if (index == 40) {
-                solution = " D" + turnTwoFrontCorners + " D'";
-                sequence = parseSequence(solution);
-                runSequence(sequence);
-            } else if (index == 36 && getIndex(cubies, 12) == 22) {
-                solution = turnTwoFrontCorners;
-                sequence = parseSequence(solution);
-                runSequence(sequence);
-            }else if (index == 36) {
-                solution = turnTwoFrontCorners;
-                sequence = parseSequence(solution);
-                runSequence(sequence);
-            }
-            result = solution + solveLastCorners();
         }
         return result;
     }
@@ -644,7 +726,7 @@ public final class Cubies {
                 result = solution;
                 sequence = parseSequence(solution);
                 runSequence(sequence);
-                solution = orderLastCorners();
+                solution = orderLastCross();
                 result += solution;
                 break;
             case 29:
@@ -653,7 +735,7 @@ public final class Cubies {
                 result = solution;
                 sequence = parseSequence(solution);
                 runSequence(sequence);
-                solution = orderLastCorners();
+                solution = orderLastCross();
                 result += solution;
                 break;
             case 37:
@@ -662,7 +744,7 @@ public final class Cubies {
                 result = solution;
                 sequence = parseSequence(solution);
                 runSequence(sequence);
-                solution = orderLastCorners();
+                solution = orderLastCross();
                 result += solution;
                 break;
         }
@@ -671,11 +753,42 @@ public final class Cubies {
     }
 
     public String solveLastCross() {
+        int index;
+        int[] edges = {41, 43, 45, 47};
+        for (int edge : edges) {
+            switch (edge) {
+                case 41:
+                    index = getIndex(cubies, edge);
+                    if (index != 41 && index != 13) {
+                        throw new OrderCubiesException("Wrong edge order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 43:
+                    index = getIndex(cubies, edge);
+                    if (index != 43 && index != 21) {
+                        throw new OrderCubiesException("Wrong edge order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 45:
+                    index = getIndex(cubies, edge);
+                    if (index != 45 && index != 29) {
+                        throw new OrderCubiesException("Wrong edge order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+                case 47:
+                    index = getIndex(cubies, edge);
+                    if (index != 47 && index != 37) {
+                        throw new OrderCubiesException("Wrong edge order. Edge " + edge + " is in index " + index);
+                    }
+                    break;
+            }
+        }
+
         String solution = "";
         List<Movements>  sequence;
         int index13 = getIndex(cubies, 13);
         int index21 = getIndex(cubies, 21);
-        int index29 = getIndex(cubies, 22);
+        int index29 = getIndex(cubies, 29);
         int index37 = getIndex(cubies, 37);
         String finalSolutionLinear = " R L' F R L' U R L' B B L R' U L R' F L R' D D";
         String finalSolutionDiagonal = " L' D' U B B D U' D U' F' D' F D U' D U' B B D U' L D" ;
@@ -735,6 +848,7 @@ public final class Cubies {
               .replace(" B' B' B' B'", " ")
               .replace(" L' L' L' L'", " ")
               .replace(" D' D' D' D'", " ")
+
               .replace(" U' U ", " ")
               .replace(" F' F ", " ")
               .replace(" R' R ", " ")
@@ -746,20 +860,33 @@ public final class Cubies {
               .replace(" R R'", " ")
               .replace(" B B'", " ")
               .replace(" L L'", " ")
-              .replace(" D D'", " ");
+              .replace(" D D'", " ")
+
+              .replace("U' U'", "U2")
+              .replace("F' F'", "F2")
+              .replace("R' R'", "R2")
+              .replace("B' B'", "B2")
+              .replace("L' L'", "L2")
+              .replace("D' D'", "D2")
+              .replace("U U ", "U2 ")
+              .replace("F F ", "F2 ")
+              .replace("R R ", "R2 ")
+              .replace("B B ", "B2 ")
+              .replace("L L ", "L2 ")
+              .replace("D D ", "D2 ")
+              .replace("  ", " ");
+
       return optimized;
     }
 
-    //U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2
-
     public String parseSequenceInitial(String sequence) {
-        String newSequence = "";
+        String newSequence = " ";
         newSequence =  sequence
                 .replace("U2", "U U")
                 .replace("F2", "F F")
                 .replace("R2", "R R")
                 .replace("B2", "B B")
-                .replace("L2", "B B")
+                .replace("L2", "L L")
                 .replace("D2", "D D");
         return newSequence;
     }

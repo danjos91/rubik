@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="722c6edf-169c-47c6-9903-903884553ed0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/OrderCubiesException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/core.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/peasycam.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme" beforeDir="false" afterPath="$PROJECT_DIR$/readme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cube.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Cubies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cubies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cube$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Box.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Face.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Move.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cube.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CubeData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cubies$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Cubies.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Faces.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MovementNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Movements.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SubVector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Vector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/core.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/peasycam.jar" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1swvMpqJk3F9E0YWOjV5TCIr2H3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Cube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Cube" />
+      <module name="Rubik" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;R B L D&quot; -m " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Rubik" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Cube" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Cube" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="722c6edf-169c-47c6-9903-903884553ed0" name="Default Changelist" comment="" />
+      <created>1621796421266</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621796421266</updated>
+      <workItem from="1621796428171" duration="64153000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="592" y="153" width="726" height="771" key="#Main_(1)" timestamp="1621917038632">
+      <screen x="67" y="0" width="1853" height="1080" />
+    </state>
+    <state x="592" y="153" width="726" height="771" key="#Main_(1)/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917038632" />
+    <state x="545" y="1107" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621949328335">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="545" y="1107" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949328335" />
+    <state x="593" y="14" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917121631" />
+    <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1621949324375">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949324375" />
+    <state width="1807" height="462" key="GridCell.Tab.0.bottom" timestamp="1621949531371">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="462" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531371" />
+    <state width="1874" height="464" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="462" key="GridCell.Tab.0.center" timestamp="1621949531370">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="462" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531370" />
+    <state width="1874" height="464" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="462" key="GridCell.Tab.0.left" timestamp="1621949531370">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="462" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531370" />
+    <state width="1874" height="464" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="462" key="GridCell.Tab.0.right" timestamp="1621949531371">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="462" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531371" />
+    <state width="1874" height="464" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="450" key="GridCell.Tab.1.bottom" timestamp="1621940861161">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="450" key="GridCell.Tab.1.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861161" />
+    <state width="1874" height="464" key="GridCell.Tab.1.bottom/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="450" key="GridCell.Tab.1.center" timestamp="1621940861160">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="450" key="GridCell.Tab.1.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
+    <state width="1874" height="464" key="GridCell.Tab.1.center/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="450" key="GridCell.Tab.1.left" timestamp="1621940861160">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="450" key="GridCell.Tab.1.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
+    <state width="1874" height="464" key="GridCell.Tab.1.left/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state width="1807" height="450" key="GridCell.Tab.1.right" timestamp="1621940861160">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="450" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
+    <state width="1874" height="464" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>506</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>586</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>562</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>566</line>
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>569</line>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>579</line>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>647</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>660</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>666</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>675</line>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>676</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>677</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>684</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>678</line>
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>685</line>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>686</line>
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>687</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Cubies.java</url>
+          <line>688</line>
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
