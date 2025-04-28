@@ -20,34 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="722c6edf-169c-47c6-9903-903884553ed0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/OrderCubiesException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/core.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/peasycam.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme" beforeDir="false" afterPath="$PROJECT_DIR$/readme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cubies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cubies.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cube$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Box.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Face.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cube$Move.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cube.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CubeData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cubies$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Cubies.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Faces.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MovementNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Movements.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SubVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Vector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/core.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/peasycam.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rubik.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Rubik.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +42,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1swvMpqJk3F9E0YWOjV5TCIr2H3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -80,6 +55,9 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Cube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -99,7 +77,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Rubik" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;F' D L L' R L F D' L' L2 L2 B' R' D2 B' F L D' F R D D2 B2 D2 U' L2 L' F' B' R'&quot; -m" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,6 +106,8 @@
       <option name="presentableId" value="Default" />
       <updated>1621796421266</updated>
       <workItem from="1621796428171" duration="64153000" />
+      <workItem from="1621956264363" duration="201000" />
+      <workItem from="1621956517283" duration="1292000" />
     </task>
     <servers />
   </component>
@@ -144,40 +124,45 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="592" y="153" width="726" height="771" key="#Main_(1)" timestamp="1621917038632">
       <screen x="67" y="0" width="1853" height="1080" />
     </state>
     <state x="592" y="153" width="726" height="771" key="#Main_(1)/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917038632" />
-    <state x="545" y="1107" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621949328335">
+    <state x="378" y="1333" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621957024194">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state x="545" y="1107" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949328335" />
+    <state x="378" y="1333" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621957024194" />
     <state x="593" y="14" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917121631" />
     <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1621949324375">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949324375" />
-    <state width="1807" height="462" key="GridCell.Tab.0.bottom" timestamp="1621949531371">
+    <state x="771" y="1322" width="424" height="621" key="FileChooserDialogImpl" timestamp="1621956584408">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state width="1807" height="462" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531371" />
+    <state x="771" y="1322" width="424" height="621" key="FileChooserDialogImpl/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621956584408" />
+    <state width="1807" height="180" key="GridCell.Tab.0.bottom" timestamp="1621966508775">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="1807" height="180" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
     <state width="1874" height="464" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="462" key="GridCell.Tab.0.center" timestamp="1621949531370">
+    <state width="1807" height="180" key="GridCell.Tab.0.center" timestamp="1621966508775">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state width="1807" height="462" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531370" />
+    <state width="1807" height="180" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
     <state width="1874" height="464" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="462" key="GridCell.Tab.0.left" timestamp="1621949531370">
+    <state width="1807" height="180" key="GridCell.Tab.0.left" timestamp="1621966508775">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state width="1807" height="462" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531370" />
+    <state width="1807" height="180" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
     <state width="1874" height="464" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="462" key="GridCell.Tab.0.right" timestamp="1621949531371">
+    <state width="1807" height="180" key="GridCell.Tab.0.right" timestamp="1621966508775">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state width="1807" height="462" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949531371" />
+    <state width="1807" height="180" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
     <state width="1874" height="464" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
     <state width="1807" height="450" key="GridCell.Tab.1.bottom" timestamp="1621940861161">
       <screen x="0" y="1080" width="1920" height="1080" />
@@ -199,6 +184,10 @@
     </state>
     <state width="1807" height="450" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
     <state width="1874" height="464" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
+    <state x="476" y="1210" width="1024" height="845" key="SettingsEditor" timestamp="1621956420877">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="476" y="1210" width="1024" height="845" key="SettingsEditor/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621956420877" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
