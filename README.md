@@ -73,7 +73,8 @@ All minicube parts have specific numeration. The cube is represented as a vector
 - **4** - Run solver second layer
 - **5** - Run solver third layer corners
 - **6** - Run solver third layer cross
-- **7** - Exit
+- **7** - Run solver last cross
+- **8** - Exit
 
 ### Manual Cube Rotation
 - **UP**: `e` (clockwise), `r` (counter-clockwise)
