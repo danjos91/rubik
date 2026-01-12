@@ -86,7 +86,7 @@ All minicube parts have specific numeration. The cube is represented as a vector
 
 ## Demo
 
-![Rubik's Cube Solver in Action](demo.gif)
+![Rubik's Cube Solver in Action](./rubikdemo.gif)
 
 *GIF showing the program solving a Rubik's cube in real-time*
 
