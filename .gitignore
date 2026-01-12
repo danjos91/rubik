@@ -54,3 +54,6 @@ Thumbs.db
 *.temp
 *~
 
+# Native libraries (extracted at runtime from JAR)
+natives/
+

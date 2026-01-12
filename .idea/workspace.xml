@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -21,7 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="722c6edf-169c-47c6-9903-903884553ed0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rubik.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Rubik.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,27 +43,41 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectId" id="1swvMpqJk3F9E0YWOjV5TCIr2H3" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-  </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Cube.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Maven.Rubik [clean].executor": "Run",
+    "Maven.Rubik [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/danny/Desktop/rubik",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Cube">
     <configuration name="Cube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Cube" />
       <module name="Rubik" />
@@ -89,11 +107,19 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Cube" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Cube" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -108,11 +134,12 @@
       <workItem from="1621796428171" duration="64153000" />
       <workItem from="1621956264363" duration="201000" />
       <workItem from="1621956517283" duration="1292000" />
+      <workItem from="1768244461422" duration="1910000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -124,70 +151,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="592" y="153" width="726" height="771" key="#Main_(1)" timestamp="1621917038632">
-      <screen x="67" y="0" width="1853" height="1080" />
-    </state>
-    <state x="592" y="153" width="726" height="771" key="#Main_(1)/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917038632" />
-    <state x="378" y="1333" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621957024194">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state x="378" y="1333" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621957024194" />
-    <state x="593" y="14" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621917121631" />
-    <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1621949324375">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state x="870" y="1157" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621949324375" />
-    <state x="771" y="1322" width="424" height="621" key="FileChooserDialogImpl" timestamp="1621956584408">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state x="771" y="1322" width="424" height="621" key="FileChooserDialogImpl/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621956584408" />
-    <state width="1807" height="180" key="GridCell.Tab.0.bottom" timestamp="1621966508775">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="180" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
-    <state width="1874" height="464" key="GridCell.Tab.0.bottom/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="180" key="GridCell.Tab.0.center" timestamp="1621966508775">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="180" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
-    <state width="1874" height="464" key="GridCell.Tab.0.center/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="180" key="GridCell.Tab.0.left" timestamp="1621966508775">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="180" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
-    <state width="1874" height="464" key="GridCell.Tab.0.left/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="180" key="GridCell.Tab.0.right" timestamp="1621966508775">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="180" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621966508775" />
-    <state width="1874" height="464" key="GridCell.Tab.0.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="450" key="GridCell.Tab.1.bottom" timestamp="1621940861161">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="450" key="GridCell.Tab.1.bottom/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861161" />
-    <state width="1874" height="464" key="GridCell.Tab.1.bottom/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="450" key="GridCell.Tab.1.center" timestamp="1621940861160">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="450" key="GridCell.Tab.1.center/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
-    <state width="1874" height="464" key="GridCell.Tab.1.center/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="450" key="GridCell.Tab.1.left" timestamp="1621940861160">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="450" key="GridCell.Tab.1.left/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
-    <state width="1874" height="464" key="GridCell.Tab.1.left/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state width="1807" height="450" key="GridCell.Tab.1.right" timestamp="1621940861160">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state width="1807" height="450" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621940861160" />
-    <state width="1874" height="464" key="GridCell.Tab.1.right/0.1080.1920.1080/67.0.1853.1080@67.0.1853.1080" timestamp="1621928737466" />
-    <state x="476" y="1210" width="1024" height="845" key="SettingsEditor" timestamp="1621956420877">
-      <screen x="0" y="1080" width="1920" height="1080" />
-    </state>
-    <state x="476" y="1210" width="1024" height="845" key="SettingsEditor/0.1080.1920.1080/67.0.1853.1080@0.1080.1920.1080" timestamp="1621956420877" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
