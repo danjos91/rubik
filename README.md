@@ -6,6 +6,12 @@
 ![JOGL](https://img.shields.io/badge/JOGL-2.3.2-green.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+## Demo
+
+![Rubik's Cube Solver in Action](./rubikdemo.gif)
+
+*GIF showing the program solving a Rubik's cube in real-time*
+
 ## Description
 
 A 3D Rubik's Cube solver application that visualizes the solving process in real-time. This project implements a complete solver algorithm that can solve any scrambled Rubik's cube configuration. The application features an interactive 3D visualization using Processing and JOGL, allowing you to watch the cube being solved step by step.
@@ -83,12 +89,6 @@ All minicube parts have specific numeration. The cube is represented as a vector
 - **BACK**: `j` (clockwise), `k` (counter-clockwise)
 - **DOWN**: `x` (clockwise), `c` (counter-clockwise)
 - **LEFT**: `a` (clockwise), `s` (counter-clockwise)
-
-## Demo
-
-![Rubik's Cube Solver in Action](./rubikdemo.gif)
-
-*GIF showing the program solving a Rubik's cube in real-time*
 
 ## Building and Running
 
